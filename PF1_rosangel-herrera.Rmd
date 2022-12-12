@@ -1,0 +1,71 @@
+---
+title: Propuesta de Proyecto
+author: "Rosangel Herrera"
+date: "2022-12-13"
+output: 
+  html_document:
+    fig_height: 7
+    fig_width: 10
+    highlight: tango
+    theme: cerulean
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Métricas de interés de los equipos aspirantes a ganar la Copa del Mundo Qatar 2022
+
+![](https://a2.espncdn.com/combiner/i?img=%2Fi%2Fleaguelogos%2Fsoccer%2F500%2F4.png){width=50%}
+
+El fútbol, como uno de los deportes más populares y seguidos en el mundo, logra unificar a las personas al proporcionar un interés común y crear un sentido de comunidad y pertenencia entre ellas. Entender desde lo más simple de esta actividad hasta una perspectiva métrica, requiere planificación, asignación de datos y de recursos. Según la definición del Project Management Institute (2017), un proyecto es “un esfuerzo temporal que se lleva a cabo para generar un producto, servicio o resultado único”. Con esto en mente, podemos definir el proyecto propuesto en los siguientes puntos:
+
++ Tópico a abordar/interrogante(s) a ser contestada(s)
++ Título propuesto del proyecto
++ Justificación del tópico elegido
++ Descripción de datos a utilizar
++ Metodología a utilizar para dar respuesta al planteamiento
+
+## Tópico a abordar
+Ante las expectativas generadas durante los últimos meses por quién será la próxima selección en levantar la copa del mundo de Qatar 2022, el tópico a abordar consiste en las _Métricas de interés de los equipos aspirantes a ganar la Copa del Mundo Qatar 2022_. Si bien, existen múltiples métricas relacionadas al fútbol como deporte y la consolidación de estrategias basadas en los resultados estadísticos, la medición del presente tópico representa en sus indicadores el éxito o fracaso en los resultados.
+
+## Título propuesto
+Como parte de la narrativa del proyecto, el título formulado sería el _Panorama previo a la Copa Mundial Qatar 2022_ en él se buscará desarrollar la influencia de Qatar como nación y el rol de las selecciones dentro del torneo, así como un vistazo a las estadísticas que respaldan su historial en participaciones previas y las expectativas hacia las selecciones favoritas.
+
+## Justificación del tópico elegido
+La justificación para conocer las métricas de los equipos aspirantes a ganar la Copa del Mundo consiste en incorporar tablas y visualizaciones que muestran la experiencia de las selecciones y de los jugadores a través de los datos recolectados en ediciones anteriores del torneo. Esto se puede hacer mediante el uso del sitio web **[Mavenanalytics](https://www.mavenanalytics.io/blog/maven-world-cup-challenge)** , que ofrece una definición de los indicadores desde una perspectiva de observación sistemática. Esta información ayudará a identificar las selecciones favoritas entre los aficionados y a comprender las tendencias que las caracterizan en función de su rendimiento.
+ 
+## Descripción de datos a utilizar
+El objetivo de los siguientes datos, es realizar un análisis exploratorio para examinar las distintas métricas de interés relacionadas a los aspirantes a ganar la Copa del Mundo que se dará en Qatar 2022, esto se realizará mediante la visualización de los datos recopilados en las diferentes Copas del Mundo desde su inicio en Uruguay 1930. Es por ello, que la fuente de recopilación de datos parte desde el Archivo de la Copa Mundial de la FIFA y RSSSF, en el que se comparte todos los partidos de las copas mundiales anteriores, las clasificaciones en partidos pasados y los grupos concebidos para el actual torneo permitiendo crear una serie de fichas y tablas para la compresión del mismo.
+```{r}
+library(tidyverse)#manejo de datos
+#Carga de la base de datos en formato .CSV
+world_cup_matches <- read_csv("World+Cup/world_cup_matches.csv")
+X2022_world_cup_groups <- read_csv("World+Cup/2022_world_cup_groups.csv")
+head(X2022_world_cup_groups)
+head(world_cup_matches)
+```
+Para obtener la data usada en la presentación se usó un repositorio de datos en el siguiente sitio web **[Mavenanalytics](https://www.mavenanalytics.io/blog/maven-world-cup-challenge)** en él se disponen internamente de un _zip file_ un total de 7 archivos en formato .CSV con el que se albergan las Dataset correspondientes para su análisis de los cuales solo se tomaron dos como punto de partida, denominados "World Cup World cup matches.csv" y "World Cup 2022 World cup groups.csv".
+
+## Cuestiones Planteadas
+Para entender el fútbol es importante conocer quienes juegan, quienes son los favoritos, cuando gana y cuando pierde. Las interrogantes planteadas responden a la narrativa de obtener un panorama general de las selecciones previo a Qatar 2022 por lo que se responderán a medida que se da el análisis. No obstante, la premisa trascendental se basa en primer lugar en la ruta histórica de las selecciones con mayor favoritismo y éxito en sus participaciones dentro del torneo. Para ello, se debate **¿Cuáles son los equipos favoritos en el torneo?**, **¿Cuánto es el promedio de goles de las selecciones favoritas?**, **¿Cómo se comparan a otras selecciones?**. Y, por último,**¿Cuáles son sus tendencias de juegos ganados y perdidos cuando son campeones?**Para ello, se considera el uso de estadísticas descriptivas para el análisis y entendimiento de los resultados. Por lo cual iniciamos examinando a las selecciones con más goles en el Torneo FIFA World Cup desde su inicio con la carga de datos anteriormente descritos para facilitar la lectura del mismo.
+
+En segundo lugar, el enfoque del proyecto se orientará a los jugadores entendiendo la capacidad física y el reconocimiento histórico a través del análisis del rendimiento del mismo en las selecciones del cual se debate sobre **¿Cuál es la cantidad de partidos jugados?**, **¿Cuál es la cantidad de goles y participaciones?**, así como **¿Cuál es la edad promedio de los jugadores claves en las selecciones con mayor favoritismo?**
+
+## Metodología a utilizar para dar respuesta al planteamiento
+Dentro del marco metodológico del proyecto se busca obtener una visión general orientada a la aplicación de herramientas para el análisis de datos y de la representación en modelos gráficos para conocer los aspectos más relevantes del tópico seleccionado y de la fluidez de las selecciones a medida que se maneja la información de modo cuantitativo con la finalidad de resolver las preguntas planteadas anteriormente y conocer las características de la información.
+
+## Conclusión
+En relación a las cuestiones presentadas y el análisis previo de la dataset propuesta, se resume las cuestiones más importantes a nivel de selecciones y de jugadores, así como la descripción de los datos para la formulación de gráfico que permitan al lector tener un mayor entendimiento visual sobre el tema y comprender la relevancia de los datos con el desarrollo del tópico, así como dar a conocer una tendencia relativa sobre la experiencia en el torneo y el desarrollo de los individuos que los conforman.
+
+## Referencias bibliográficas
++ Maven Analytics. https://www.mavenanalytics.io/blog/maven-world-cup-challenge
