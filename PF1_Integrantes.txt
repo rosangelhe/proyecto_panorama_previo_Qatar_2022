@@ -1,3 +1,6 @@
 Integrantes:
 Daniel Bolivar
 Rosangel Herrera
+
+Url del proyecto
+https://github.com/rosangelhe/proyecto_panorama_previo_Qatar_2022

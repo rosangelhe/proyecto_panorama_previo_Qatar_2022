@@ -1,0 +1,21 @@
+Team,Player,Player_num,Event,Type,X,Y,X2,Y2
+ARG,Messi,10,Shot,Goal_1,89,50,99,54
+ARG,Molina,26,Pass,Goal_2Game,20,83,36,61
+ARG,Mac Allister,20,Pass,Goal_2Game,35,61,46,66
+ARG,Messi,10,Pass,Goal_2Game,46,66,53,82
+ARG,Alvarez,9,Pass,Goal_2Game,52,81,82,67
+ARG,Mac Allister,20,Pass,Goal_2Game,82,67,92,36
+ARG,Di Maria,11,Shot,Goal_2,92,36,98,51
+FRA,Mbappe,10,Shot,Goal_1,11,50,1,54
+FRA,Coman,20,Pass,Goal_2Game,31,21,36,39
+FRA,Rabiot,14,Pass,Goal_2Game,36,38,20,76
+FRA,Mbappe,10,Pass,Goal_2Game,20,76,22,66
+FRA,Thuram,26,Pass,Goal_2Game,22,66,10,67
+FRA,Mbappe,10,Shot,Goal_2,10,67,1,45
+ARG,G.Montiel,4,Pass,Goal_3Game,54,88,80,73
+ARG,Martinez,22,Pass,Goal_3Game,80,73,78,82
+ARG,Messi,10,Pass,Goal_3Game,78,81,79,62
+ARG,E.Fernandez,24,Pass,Goal_3Game,79,62,93,69
+ARG,Martinez,22,Shot,Goal_3Game,94,68,98,56
+ARG,Messi,10,Shot,Goal_3,95,56,98,51
+FRA,Mbappe,10,Shot,Goal_3,11,50,1,55
