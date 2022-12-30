@@ -4,7 +4,8 @@
 #install.packages("ggthemes")
 #install.packages("gganimate")
 #install.packages("reactablefmtr")
-# install.packages("ggsoccer")
+#install.packages("reactable")
+#install.packages("ggsoccer")
 
 library(tidyverse)#manejo de datos
 library(dplyr)
@@ -14,6 +15,7 @@ library(ggplot2)  #Manejo de Grafico
 library(ggthemes) #Manejo de temas en graficos
 library(gganimate)#creacion de animaciones en graficos
 library(reactablefmtr) #mejora el estilo y el formato de las tablas 
+library(reactable) #mejora el estilo y el formato de las tablas 
 library(ggsoccer) #creacion de graficos de juego
 
 
@@ -269,12 +271,12 @@ head(team_Assists)
 team_Penalties_Scored #hacer la suma de todos los penales cobrados y marcados
 
 #----------------------------------------------------------------------------------------
-# 19 ¿cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 wcup_penaltis_s <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
 #----------------------------------------------------------------------------------------
-# 20 ¿cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+# 20 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 wcup_penaltis_a <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Goal Against`)
 
@@ -536,14 +538,24 @@ all_finals %>%
 # Tabla 12 Edad de los jugadores en sus selecciones
 
 
-# Grafica 13 promedio de edad de las selecciones
+# Grafica 13 Promedio de edad de las selecciones
+
+ggplot(age_cup, aes(x = `Team`, group = 1)) + 
+  geom_line(aes(y = Age)) + 
+  labs(title = "Promedio de edad de las selecciones", 
+       caption = "Fuente: Economics", 
+       y = "Edad Promedio",
+       x = "Selecciones") +  # title and caption
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+        panel.grid.minor = element_blank())  # turn off minor grid
 
 # Tabla 14 Ligas y Clubs con mayor influencia
 
 
+
 # ------------- RESULTADOS POST MUNDIAL ---------------------------------
 
-# Tabla ¿Quienes fueron los Goleadores del torneo?
+# Tabla 15 ¿Quienes fueron los Goleadores del torneo?
 reactable(
   player_Goals,
   defaultSorted = "Goals",
@@ -553,7 +565,7 @@ reactable(
   )
 )
 #----------------------------------------------------------------------------------------
-# Tabla ¿Quienes dieron mas asistencia a gol en el torneo?
+# Tabla 16 ¿Quienes dieron mas asistencia a gol en el torneo?
 reactable(
   player_Assists,
   defaultSorted = "Games Played",
@@ -563,6 +575,22 @@ reactable(
   )
 ) #Revisar posiciones
 
+
+
+# 13 TABLA DE JUEGOS E INSTANCIAS QUE LLEGARON # ALFRED
+
+#----------------------------------------------------------------------------------------
+# 15 Promedio de goles por partido
+#----------------------------------------------------------------------------------------
+# 17 Equipos con mayor numero de asistencias
+
+#----------------------------------------------------------------------------------------
+# 18 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
+#----------------------------------------------------------------------------------------
+# 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+
+#----------------------------------------------------------------------------------------
+# 20 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 
 # ------------- ¿Que paso en la Final? ---------------------------------
 
@@ -582,4 +610,36 @@ ggplot(map_fra) +
   theme_pitch() +
   theme(panel.background = element_rect(fill = "#186d33"))
 #----------------------------------------------------------------------------------------
+# 22 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
+#----------------------------------------------------------------------------------------
+# 23 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+#----------------------------------------------------------------------------------------
+# 24 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
 
+# 25 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+
+# 26 Faltas cometidas
+#----------------------------------------------------------------------------------------
+# 27 Efectividad de los pases
+
+# 28 Posesion de la pelota
+
+# 29 Tiros al arco / tiros de esquina
+
+# 30 Cantidad de fuera de juegos (Offside)
+
+#----------------------------------------------------------------------------------------
+# 31 Resultado final
+
+# Resultado ronda de penales
+
+# Resultado entre los 90 min y la prorroga
+#----------------------------------------------------------------------------------------
+#32 Caracteristicas del Estadio
+
+#comparacion con otros partidos y sacar:
+#cual fue el partido con mas aficionados
+
+
+
+# 21 Cuales fueron los estadios con mas asistencia?
