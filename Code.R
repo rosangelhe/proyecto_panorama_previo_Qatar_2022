@@ -236,6 +236,7 @@ colnames(age_cup) <- c("Team", "Age")
 #----------------------------------------------------------------------------------------
 # 11 Ligas y Clubs con mayor influencia
 
+# clubs con mayor influencia
 fc_league <- X2022_world_cup_squads
 fc_league <- fc_league %>% # creacion de tabla de frecuencia variable cualitativa
   group_by(League, Club) %>% 
@@ -243,46 +244,48 @@ fc_league <- fc_league %>% # creacion de tabla de frecuencia variable cualitativ
 
 fc_league <- fc_league[with(fc_league, order(-frequency)), ] #ajuste de orden descendiente
 
+# ligas con mayor influencia
+fc_league1 <- fc_league %>% 
+  summarize(frecuency = sum(frequency))
+
+fc_league1 <- fc_league1[with(fc_league1, order(-frecuency)), ] #ajuste de orden descendiente
+
 # ------------- RESULTADOS POST MUNDIAL ---------------------------------
 
-# 13 TABLA DE JUEGOS E INSTANCIAS QUE LLEGARON # ALFRED
-
-#----------------------------------------------------------------------------------------
-# 14 ¿Quienes fueron los Goleadores del torneo? - ¿Quien gano el botin de oro?
+# 12 ¿Quienes fueron los Goleadores del torneo? - ¿Quien gano el botin de oro?
 player_Goals <- na.omit(player_Goals)
 
 head(player_Goals)
 
 #----------------------------------------------------------------------------------------
-# 15 Promedio de goles por partido
-mean_goals <- rowMeans(player_Goals[, c(2,3)], na.rm = TRUE )
-head(mean_goals) # revisar
+# 13 Promedio de goles por partido
+player_Goals$mean_goals <- round(player_Goals$Goals / player_Goals$`Games Played`, 1) #agregado de columna
 
 #----------------------------------------------------------------------------------------
-# 16 ¿Quienes dieron mas asistencia a gol en el torneo?
+# 14 ¿Quienes dieron mas asistencia a gol en el torneo?
 head(player_Assists)
 
 #----------------------------------------------------------------------------------------
-# 17 Equipos con mayor numero de asistencias
+# 15 Equipos con mayor numero de asistencias
 head(team_Assists)
 
 #----------------------------------------------------------------------------------------
-# 18 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
-team_Penalties_Scored #hacer la suma de todos los penales cobrados y marcados
+# 16 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
+team_Penalties_Scored
 
 #----------------------------------------------------------------------------------------
-# 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# 17 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 wcup_penaltis_s <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
 #----------------------------------------------------------------------------------------
-# 20 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+# 18 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 wcup_penaltis_a <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Goal Against`)
 
 # ------------- ¿Que paso en la Final? ---------------------------------
 
-# 21 Mapa de tiros y pases
+# 19 Mapa de tiros y pases
 map_arg <- the_final %>%
   filter(Team %in% c("ARG"))
 
@@ -290,44 +293,44 @@ map_fra <- the_final %>%
   filter(Team %in% c("FRA"))
 
 #----------------------------------------------------------------------------------------
-# 22 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
+# 20 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
 penaltis_final_s <- team_Penalties_Scored %>%
   filter(Country %in% c("Argentina", "France")) %>%
   select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
 #----------------------------------------------------------------------------------------
-# 23 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+# 21 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
 penaltis_final_a <- team_Penalties_Scored %>%
   filter(Country %in% c("Argentina", "France")) %>%
   select(`Country`, `Rank`, `Games Played`, `Goal Against`)
 
 #----------------------------------------------------------------------------------------
-# 24 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+# 22 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
 wcup_cards_home <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_Yellow_cards, Home_team_red_cards)
 
-# 25 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+# 23 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
 wcup_cards_away <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Away_team_Yellow_cards, Away_team_red_cards)
 
-# 26 Faltas cometidas
+# 24 Faltas cometidas
 fouls <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_Fouls, Away_team_Fouls)
 #----------------------------------------------------------------------------------------
-# 27 Efectividad de los pases
+# 25 Efectividad de los pases
 pass <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_shots, Home_team_pass_accuracy, Away_team_shots, Away_team_pass_accuracy)
 
-# 28 Posesion de la pelota
+# 26 Posesion de la pelota
 possession <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_Possession, Away_team_Possession)
 
-# 29 Tiros al arco / tiros de esquina
+# 27 Tiros al arco / tiros de esquina
 shots <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_shots, Away_team_shots, `Home_team_(Shots_on_target)`, `Away_team_(Shots_on_target)`)
@@ -336,12 +339,12 @@ corners <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_Corners, Away_team_Corners)
 
-# 30 Cantidad de fuera de juegos (Offside)
+# 28 Cantidad de fuera de juegos (Offside)
 offside <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_offsite, Away_team_offsite)
 #----------------------------------------------------------------------------------------
-# 31 Resultado final
+# 29 Resultado final
 
 # Resultado ronda de penales
 p_final_wcup <- FIFA_WORLD_CUP_2022 %>%
@@ -354,20 +357,19 @@ g_final_wcup <- FIFA_WORLD_CUP_2022 %>%
   select(Home_team_Goals, Away_team_Goals)
 
 #----------------------------------------------------------------------------------------
-#32 Caracteristicas del Estadio
+# 30 Caracteristicas del Estadio
 
-stadium_final_wcup <- FIFA_WORLD_CUP_2022 %>%
-  filter(Mach_type %in% c("Final")) %>%
-  select(Stadium, winner_Team)
-# agregar cantidad de aficionados
-
-#comparacion con otros partidos y sacar:
-#cual fue el partido con mas aficionados
+# Datos de la Final
+stadium_final_wcup <- attendance_Sheet %>%
+  filter(Date %in% c("18 December 2022")) %>%
+  select(Date, Time, Home, Away, Attendance, Venue)
 
 
+# ¿Cual fue el partido con mas asistencia?
+max_attendance <- attendance_Sheet[which.max(attendance_Sheet$Attendance),]
 
-# 21 Cuales fueron los estadios con mas asistencia?
-
+# ¿Cual fue el partido con menos asistencia?
+min_attendance <- attendance_Sheet[which.min(attendance_Sheet$Attendance),]
 
 #----------- Parte II Visualizacion de los datos "Data Cleaning" -------------#
 
@@ -536,10 +538,12 @@ all_finals %>%
 
 #----------------------------------------------------------------------------------------
 # Tabla 12 Edad de los jugadores en sus selecciones
+wcup_age$Player <- enc2utf8(wcup_age$Player)
+wcup_age$Player <- iconv(wcup_age$Player, "UTF-8", "UTF-8", sub = '')
+reactable(wcup_age, filterable = TRUE, minRows = 10)
 
-
+#----------------------------------------------------------------------------------------
 # Grafica 13 Promedio de edad de las selecciones
-
 ggplot(age_cup, aes(x = `Team`, group = 1)) + 
   geom_line(aes(y = Age)) + 
   labs(title = "Promedio de edad de las selecciones", 
@@ -548,14 +552,21 @@ ggplot(age_cup, aes(x = `Team`, group = 1)) +
        x = "Selecciones") +  # title and caption
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
         panel.grid.minor = element_blank())  # turn off minor grid
-
+#----------------------------------------------------------------------------------------
 # Tabla 14 Ligas y Clubs con mayor influencia
+fc_league$Club <- enc2utf8(fc_league$Club)
+fc_league$Club <- iconv(fc_league$Club, "UTF-8", "UTF-8", sub = '')
+reactable(fc_league, filterable = TRUE, minRows = 10)
 
 
+# Tabla 15 ligas con mayor influencia 
+fc_league1$League <- enc2utf8(fc_league1$League)
+fc_league1$League <- iconv(fc_league1$League, "UTF-8", "UTF-8", sub = '')
+reactable(fc_league1, filterable = TRUE, minRows = 10)
 
 # ------------- RESULTADOS POST MUNDIAL ---------------------------------
 
-# Tabla 15 ¿Quienes fueron los Goleadores del torneo?
+# Tabla 16 ¿Quienes fueron los Goleadores del torneo? / Promedio de goles por partido
 reactable(
   player_Goals,
   defaultSorted = "Goals",
@@ -565,36 +576,74 @@ reactable(
   )
 )
 #----------------------------------------------------------------------------------------
-# Tabla 16 ¿Quienes dieron mas asistencia a gol en el torneo?
+# Tabla 17 ¿Quienes dieron mas asistencia a gol en el torneo?
 reactable(
   player_Assists,
-  defaultSorted = "Games Played",
+  defaultSorted = "Assists",
   defaultSortOrder = "desc",
   defaultColDef = colDef(
     cell = data_bars(player_Assists, text_position = "outside-base")
   )
-) #Revisar posiciones
-
-
-
-# 13 TABLA DE JUEGOS E INSTANCIAS QUE LLEGARON # ALFRED
+) 
 
 #----------------------------------------------------------------------------------------
-# 15 Promedio de goles por partido
+# Tabla 18 Equipos con mayor numero de asistencias
+reactable(
+  team_Assists,
+  defaultSorted = "Assists",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(team_Assists, text_position = "outside-base")
+  )
+) 
 #----------------------------------------------------------------------------------------
-# 17 Equipos con mayor numero de asistencias
+# Tabla 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+reactable(
+  wcup_penaltis_s,
+  defaultSorted = "Penalties Scored",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(wcup_penaltis_s, text_position = "outside-base")
+  )
+) 
 
+# Grafica 20 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+ggplot(wcup_penaltis_s, aes(x = `Country`, group = 1)) + 
+  geom_line(aes(y = `Penalties Scored`)) + 
+  labs(title = "Promedio de edad de las selecciones", 
+       caption = "Fuente: Economics", 
+       y = "Edad Promedio",
+       x = "Selecciones") +  # title and caption
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+        panel.grid.minor = element_blank())  # turn off minor grid
 #----------------------------------------------------------------------------------------
-# 18 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
-#----------------------------------------------------------------------------------------
-# 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# Tabla 21 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+reactable(
+  wcup_penaltis_a,
+  defaultSorted = "Goal Against",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(wcup_penaltis_a, text_position = "outside-base")
+  )
+)
 
-#----------------------------------------------------------------------------------------
-# 20 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
-
+# Grafica 22 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+wcup_penaltis_a %>% 
+  ggplot(aes(x = `Country`, y = `Goal Against`, fill = `Country`)) +
+  geom_col() +
+  geom_text(aes(label = round(`Goal Against`, digits = 2)), vjust = -1) +
+  xlab("Country") +
+  ylab("") +
+  theme_minimal() +
+  labs(title = "Selecciones con mayor cantidad de penales en contra durante todo el torneo",
+       caption = "Fuente: XXXX",
+       tag = "XXXX",
+       x = "Selecciones",
+       y = "Penales en Contra",
+  )
 # ------------- ¿Que paso en la Final? ---------------------------------
 
-# Grafica de tiros y pases de la seleccion Argentina
+# Grafica 23 tiros y pases a gol de la seleccion Argentina
 ggplot(map_arg) +
   annotate_pitch(fill = "#1b893e", colour = "white") +
   geom_segment(aes(x = X, y = Y, xend = X2, yend = Y2),
@@ -602,7 +651,7 @@ ggplot(map_arg) +
   theme_pitch() +
   theme(panel.background = element_rect(fill = "#186d33"))
 
-# Grafica de tiros y pases de la seleccion Francesa
+# Grafica 24 tiros y pases a gol de la seleccion Francesa
 ggplot(map_fra) +
   annotate_pitch(fill = "#1b893e", colour = "white") +
   geom_segment(aes(x = X, y = Y, xend = X2, yend = Y2),
