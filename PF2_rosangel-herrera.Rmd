@@ -1,9 +1,10 @@
 ---
-title: "“Informe Final”"
+title: "Informe Final"
 author: "Rosangel Herrera, Daniel Bolivar"
 date: "2023-01-10"
 output: 
-   html_document:    
+   html_document: 
+    code_folding: hide   
     fig_height: 7
     fig_width: 10
     highlight: tango
@@ -21,6 +22,7 @@ output:
 </style>
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
 ```
 
 # Métricas de interés de los equipos aspirantes a ganar la Copa del Mundo Qatar 2022
@@ -29,12 +31,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 El fútbol se consolida en la actualidad como el juego de pelota más popular del mundo, dada la simplicidad de sus reglas y la fácil maniobrabilidad del juego permite una mayor versatilidad al momento de elegir un lugar para jugar. En este sentido, el tema a abordar considera la variación del torneo a través de las ediciones anteriores y recorre el historial de las selecciones con mayor popularidad y éxitos, ya sea por su cantidad de goles o participaciones, así como las copas obtenidas. Asimismo, se busca resaltar los principales puntos clave de la edición realizada en Qatar 2022 que consolidaron el posicionamiento de los rivales que lograron llegar a la instancia final. Cabe destacar que esta edición fue uno de los acontecimientos deportivos más importantes de los últimos años, generando un gran interés en todo el mundo. En este informe, se respaldará mediante un análisis detallado de los principales datos arrojados en los diferentes choques entre las selecciones con el objetivo de conseguir una serie de perspectivas que busquen intuir mejor el cómo se desarrolló este evento tan importante. Al ser un evento tan significativo, implicó una cobertura mediática de gran magnitud desde meses antes de que iniciara el torneo. Al ser uno de los acontecimientos deportivos más seguidos y observados en todo el mundo, su impacto trasciende más allá del campo de juego. Y las controversias que envuelven la organización y ejecución del torneo, no exentan tanto a la FIFA como el anfitrión de críticas orientadas hacia los Derechos Humanos en Qatar, trato a los trabajadores extranjeros, mujeres y su posición sobre los derechos LGBT enalteciendo con este torneo las constantes críticas de una excusa de evento de Qatar “para mejorar su imagen". Otros han utilizado argumentos distintos en contra del anfitrión, como el clima intenso, la falta de cultura de fútbol y evidencias de sobornos y corrupción con la FIFA para afianzar su posición en contra del anfitrión del torneo. Como consecuencia, muchas personas que se suman en contra del mundial de Qatar 2022 han dejado de asistir al evento en modo de protesta, incluso algunos jugadores no asistieron al mundial para fijar su posición en contra de las condiciones en las que se organizó y ejecutó el evento. Por otra parte, desde una perspectiva deportiva esta edición fue suficientemente significativo al ser la última edición con la participación de varios jugadores catalogados como los más importantes de las últimas décadas, tales como _Lionel Messi, Cristiano Ronaldo, Neymar Jr., Ángel Di María_ son algunos de los que estarían disputando su último torneo mundialista por lo que involucran un emoción mayor por parte de los aficionados, asi como puntos estratégicos en el desempeño de sus respectivas selecciones en la contienda de consagrarse como campeones del mundo.
 
-
 ![**Un hombre salta a la cancha en el partido de Portugal vs Uruguay para protestar con la bandera LGBT+. Además, porta una playera con el apoyo a las mujeres de Irán y para "Salvar Ucrania"**](https://s.yimg.com/ny/api/res/1.2/qrf4A6s_duEY8U3gJRxCNw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://s.yimg.com/os/creatr-uploaded-images/2022-11/8461dce0-6f7b-11ed-bda7-1fc658905c94){width=50%}
 
 **Fuente:[Twitter @Nacion321](https://twitter.com/Nacion321/status/1597331400780238848?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1597331400780238848%7Ctwgr%5E8cfe5dc1a3649ea4849386a33400019418f8ea62%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fes-us.deportes.yahoo.com%2Faficionado-bandera-lgbt-la-forma-en-la-que-un-aficionado-desafio-al-mundial-de-qatar-2022-004258331.html)**
 
-Dicho esto, la intención de desarrollar este proyecto se enfoca en presentar la actuación histórica de los equipos desde un punto de vista cuantitativo y contrastar esos resultados con su desempeño en Qatar 2022. Para ello, se utilizaron una serie de técnicas de análisis de datos para explorar el recorrido histórico de las selecciones, siendo la principal motivación de este tema la influencia del torneo dentro de la afición y de las naciones en relación con la copa del mundo. Es por ello, que nuestro principal objetivo consiste en la precisión de los datos y de resaltar las estadísticas posteriores al final del torneo. Sumado a ello, la relevancia de los datos y de las interrogantes a desarrollar, reside en contestar y visualizar las siguientes interrogantes **¿Cuáles son los equipos favoritos en el torneo?**, **¿Cuánto es el promedio de goles de las selecciones favoritas?**, **¿Cómo se comparan a otras selecciones?** Y, por último,**¿Cuáles son sus tendencias de juegos ganados y perdidos cuando son campeones?** Cuya premisa principal personifica un panorama general previo de las selecciones desde el inicio de la FIFA World Cup como torneo. Seguidamente, se toma en cuenta **¿Cuál es el promedio de edad entre las selecciones?** y concebir **¿Cuáles son las ligas y clubs con mayor influencia y/o participantes en el torneo?** De la misma manera, se evalúan el nivel deportivo individual ponderando los datos sobre **¿Quiénes fueron los goleadores del torneo?** y **¿Quién ganó el botín de oro?.** Así como **¿Quienes dieron más asistencia a gol en el torneo?** y la comprensión sobre **¿Cuáles fueron las selecciones con mayor cantidad de penales a favor y/o en contra durante todo el torneo?.** Cuyos datos facilitan una mayor exhibición sobre algunas tendencias en el estilo de juego de las selecciones de modo que refleje el triunfo de Argentina y las estadísticas claves tales como la posesión, efectividad de los tiros y pases dentro del partido final. Por lo tanto, se considera como título final del proyecto _Panorama previo y post mundial Qatar 2022._
+Dicho esto, la intención de desarrollar este proyecto se enfoca en presentar la actuación histórica de los equipos desde un punto de vista cuantitativo y contrastar esos resultados con su desempeño en Qatar 2022. Para ello, se utilizaron una serie de técnicas de análisis de datos para explorar el recorrido histórico de las selecciones, siendo la principal motivación de este tema la influencia del torneo dentro de la afición y de las naciones en relación con la copa del mundo. Es por ello, que nuestro principal objetivo consiste en la precisión de los datos y de resaltar las estadísticas posteriores al final del torneo. Sumado a ello, la relevancia de los datos y de las interrogantes a desarrollar, reside en contestar y visualizar las siguientes interrogantes **¿Cuáles son los equipos favoritos en el torneo?**, **¿Cuánto es el promedio de goles de las selecciones favoritas?**, **¿Cómo se comparan a otras selecciones?** Y, por último, **¿Cuáles son sus tendencias de juegos ganados y perdidos cuando son campeones?** Cuya premisa principal personifica un panorama general previo de las selecciones desde el inicio de la FIFA World Cup como torneo. Seguidamente, se toma en cuenta **¿Cuál es el promedio de edad entre las selecciones?** y concebir **¿Cuáles son las ligas y clubs con mayor influencia y/o participantes en el torneo?** De la misma manera, se evalúan el nivel deportivo individual ponderando los datos sobre **¿Quiénes fueron los goleadores del torneo?** y **¿Quién ganó el botín de oro?.** Así como **¿Quienes dieron más asistencia a gol en el torneo?** y la comprensión sobre **¿Cuáles fueron las selecciones con mayor cantidad de penales a favor y/o en contra durante todo el torneo?.** Cuyos datos facilitan una mayor exhibición sobre algunas tendencias en el estilo de juego de las selecciones de modo que refleje el triunfo de Argentina y las estadísticas claves tales como la posesión, efectividad de los tiros y pases dentro del partido final. Por lo tanto, se considera como título final del proyecto _Panorama previo y post mundial Qatar 2022._
 
 ## Metodología
 
@@ -120,7 +121,7 @@ reactable(
   )
 )
 ```
-Con la finalidad de indagar **¿Cuáles son los equipos favoritos en el torneo?**para participar en la final. Y a su vez, la cantidad de anotaciones excluye a la selección de `Italia`, dado a que no logró clasificarse en el repechaje previo al torneo. Por lo cual, se anexa a la selección de `Inglaterra` como uno de los favoritos a llegar en a la final, si bien posee menos goles que su sucesor `España` con 8 tantos para la casa de apuestas **[Betfair](https://www.betfair.com/sport/football)** el día 23 de noviembre del 2022. Por lo cual, dentro los goles anotados por el top 5 de selecciones goleadores participantes en Qatar 2022, se encuentran `Brasil` con un total de 229 goles, `Argentina` con 137 seguido de `Francia` con 120 y `España` e `Inglaterra` con 99 y 91 goles respectivamente.
+Con la finalidad de indagar **¿Cuáles son los equipos favoritos en el torneo?** para participar en la final. Y a su vez, la cantidad de anotaciones excluye a la selección de `Italia`, dado a que no logró clasificarse en el repechaje previo al torneo. Por lo cual, se anexa a la selección de `Inglaterra` como uno de los favoritos a llegar en a la final, si bien posee menos goles que su sucesor `España` con 8 tantos para la casa de apuestas **[Betfair](https://www.betfair.com/sport/football)** el día 23 de noviembre del 2022. Por lo cual, dentro los goles anotados por el top 5 de selecciones goleadores participantes en Qatar 2022, se encuentran `Brasil` con un total de 229 goles, `Argentina` con 137 seguido de `Francia` con 120 y `España` e `Inglaterra` con 99 y 91 goles respectivamente.
 ```{r}
 # 2 Top 05 selecciones favoritas
 fav_teams <- c("Brazil", "Argentina", "France", "Spain", "England")
@@ -206,7 +207,7 @@ top_fav %>%
        y = "Promedio de Goles",
   )
 ```
-Con motivo de intuir **¿Cómo se comparan a otras selecciones?**el Ranking FIFA como sistema de clasificación oficial en su última publicación previo al torneo y de los datos otorgados en la dataset `X2022_world_cup_groups` permite realizar tal comparación, por lo que se extrajo la posición de las 32 selecciones que participaron en el evento y su respectivo grupo de cara a la fase de grupos. De acuerdo con el listado, las principales selecciones en encabezar la lista son: `Brasil`, `Bélgica`, `Argentina`, `Francia` e `Inglaterra`.
+Con motivo de intuir **¿Cómo se comparan a otras selecciones?** el Ranking FIFA como sistema de clasificación oficial en su última publicación previo al torneo y de los datos otorgados en la dataset `X2022_world_cup_groups` permite realizar tal comparación, por lo que se extrajo la posición de las 32 selecciones que participaron en el evento y su respectivo grupo de cara a la fase de grupos. De acuerdo con el listado, las principales selecciones en encabezar la lista son: `Brasil`, `Bélgica`, `Argentina`, `Francia` e `Inglaterra`.
 ```{r}
 # 4 ranking FIFA de como inician al mundial las 32 selecciones
 r_fifa22 <- X2022_world_cup_groups
@@ -223,6 +224,7 @@ reactable(
 )
 ```
 Según el sitio web **[Bendito Futbol](https://www.benditofutbol.com/futbol-internacional/ranking-fifa-cabeza-de-serie-calculos.html)** los criterios para calcular los puntos del ranking consisten en: 
+
 + Victoria, empate o derrota (3, 1 o 0 puntos, respectivamente)
 + Estatus del partido (coeficiente de multiplicación entre 1 y 4)
 + Fuerza del oponente (coeficiente de multiplicación entre 50 y 200)
@@ -511,7 +513,7 @@ reactable(
 ) 
 ```
 
-![**Messi jugador con más asistencias del Mundial.**](https://phantom-marca.unidadeditorial.es/d3e9e7233a37f67e541066ab6cd1a581/resize/1320/f/jpg/assets/multimedia/imagenes/2022/12/18/16713921967768.jpg){width=50%}
+![**Jugadores con más asistencias del Mundial.**](https://i.ibb.co/c89Yg5P/1.png){width=50%}
 
 Si bien, dentro de este apartado se resalta a los individuos. A nivel de selecciones el número de asistencias del conjunto consiente al resultado final, tal como se observa en la tabla inferior no es sorpresa que la selección francesa lidere la cantidad de asistencias y de goles, sobre todo entendiendo su rol de finalista y de vigente campeón en el transcurso del mundial. No obstante, en el segundo lugar se encuentra la selección de `Inglaterra` seguido de `Portugal` por lo que, a hechos relevantes, la selección de `Argentina` bajo su rol de finalista se encuentra en un lejano sexto lugar, teniendo menor efectividad que sus antecesores al momento de finiquitar el juego.
 ```{r}
@@ -614,4 +616,221 @@ ggplot(map_fra) +
   theme_pitch() +
   theme(panel.background = element_rect(fill = "#186d33"))
 ```
+Como punto final del juego, se puede justificar el resultado del partido con una posesión del balón muy disputado del 54% para Argentina y 46% para Francia, con una efectividad mayor por parte argentina en cuanto a pases y tiros al arco. No obstante, a nivel defensivo la selección albiceleste también fue quien más faltas hizo con un total de 26 y 5 tarjetas amarillas igualando la cantidad de offside. En cuanto a la tanda de penales luego del empate forzado por Kylian Mbappé, Argentina marcó 4 goles frente a 2 de Francia, cuyo resultado final quedó en Argentina 3 (4) – Francia 3 (2). Dentro de la siguiente gráfica, se encuentra un resumen de la tabla final del partido.
+```{r}
+# 20 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
+penaltis_final_s <- team_Penalties_Scored %>%
+  filter(Country %in% c("Argentina", "France")) %>%
+  select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
+# 21 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+penaltis_final_a <- team_Penalties_Scored %>%
+  filter(Country %in% c("Argentina", "France")) %>%
+  select(`Country`, `Rank`, `Games Played`, `Goal Against`)
+
+# 22 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+wcup_cards_home <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Yellow_cards, Home_team_red_cards)
+
+# 23 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+wcup_cards_away <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Away_team_Yellow_cards, Away_team_red_cards)
+
+# 24 Faltas cometidas
+fouls <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Fouls, Away_team_Fouls)
+
+# 25 Efectividad de los pases
+pass <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_shots, Home_team_pass_accuracy, Away_team_shots, Away_team_pass_accuracy)
+
+# 26 Posesion de la pelota
+possession <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Possession, Away_team_Possession)
+
+# 27 Tiros al arco / tiros de esquina
+shots <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_shots, Away_team_shots, `Home_team_(Shots_on_target)`, `Away_team_(Shots_on_target)`)
+
+corners <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Corners, Away_team_Corners)
+
+# 28 Cantidad de fuera de juegos (Offside)
+offside <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_offsite, Away_team_offsite)
+
+# 29 Resultado final
+# Resultado ronda de penales
+p_final_wcup <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Penalties, Away_team_Penalties)
+
+# Resultado entre los 90 min y la prorroga
+g_final_wcup <- FIFA_WORLD_CUP_2022 %>%
+  filter(Mach_type %in% c("Final")) %>%
+  select(Home_team_Goals, Away_team_Goals)
+# 25 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+test_data <- penaltis_final_a %>%
+  merge(penaltis_final_s) %>%
+  add_column(
+    Flag = "",
+    `Red cards` = 0,
+    `Yellow cards` = 0,
+    `Fouls` = 0,
+    `Pass` = 0,
+    `Possession` = 0,
+    `Shots` = 0,
+    `Shots on target` = 0,
+    `Corners` = 0,
+    `Offside` = 0)
+
+# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+test_data$`Red cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_red_cards
+test_data$`Yellow cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_Yellow_cards
+  
+
+# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+test_data$`Red cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_red_cards
+test_data$`Yellow cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_Yellow_cards
+
+# Faltas cometidas
+test_data$`Fouls`[test_data$Country == "Argentina"] = fouls$Home_team_Fouls
+test_data$`Fouls`[test_data$Country == "France"] = fouls$Away_team_Fouls
+
+# Efectividad de los pases
+test_data$`Pass`[test_data$Country == "Argentina"] = pass$Home_team_pass_accuracy
+test_data$`Pass`[test_data$Country == "France"] = pass$Away_team_pass_accuracy
+
+# Posesion de la pelota
+test_data$`Possession`[test_data$Country == "Argentina"] = possession$Home_team_Possession
+test_data$`Possession`[test_data$Country == "France"] = possession$Away_team_Possession
+
+# Tiros al arco / tiros de esquina
+test_data$`Shots`[test_data$Country == "Argentina"] = shots$Home_team_shots
+test_data$`Shots on target`[test_data$Country == "Argentina"] = shots$`Home_team_(Shots_on_target)`
+test_data$`Shots`[test_data$Country == "France"] = shots$Away_team_shots
+test_data$`Shots on target`[test_data$Country == "France"] = shots$`Away_team_(Shots_on_target)`
+
+# Cantidad de fuera de juegos (Offside)
+test_data$`Offside`[test_data$Country == "Argentina"] = offside$Home_team_offsite
+test_data$`Offside`[test_data$Country == "France"] = offside$Away_team_offsite
+
+test_data <- test_data[, c(6, 1, 2, 3, 7, 8, 10, 14, 9, 15, 11, 12, 13, 4, 5)]
+
+test_data %>%
+  mutate(
+    Flag = ifelse(Country == "France",
+                  "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
+                  "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg")) %>%
+  reactable(
+    .,
+    pagination = FALSE,
+    highlight = TRUE,
+    compact = FALSE,
+    defaultSorted = "Rank",
+    defaultSortOrder = "asc",
+    columnGroups = list(
+      colGroup(name = "Team Performance",
+               columns = c("Pass", "Possession", "Offside")),
+      colGroup(name = "Team Behavior",
+               columns = c("Red cards", "Yellow cards", "Fouls"))
+    ),
+    rowStyle = group_border_sort("Rank"),
+    columns = list(
+      Rank = colDef(
+        name = "Rank.",
+        maxWidth = 85,
+        style = group_merge_sort("Rank")
+      ),
+      Flag = colDef(
+        name = "",
+        maxWidth = 100,
+        sortable = FALSE,
+        cell = embed_img(.)
+      ),
+      Country = colDef(
+        minWidth = 100,
+        align = "left",
+        style = list(borderRight = "1px solid #777")
+      ),
+      `Games Played` = colDef(
+        maxWidth = 70,
+        align = "center",
+        style = list(borderRight = "1px solid #777")
+      ),
+      `Goal Against` = colDef(
+        maxWidth = 180,
+        cell = data_bars(., text_size = 13)),
+      `Penalties Scored` = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          text_position = 'outside-end',
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      ),
+      `Red cards` = colDef(
+        maxWidth = 80,
+        cell = pill_buttons(., colors = "red", bold_text = TRUE)
+      ),
+      `Yellow cards` = colDef(
+        maxWidth = 80,
+        cell = pill_buttons(., colors = "yellow", bold_text = TRUE)
+      ),
+      Fouls = colDef(
+        maxWidth = 55,
+        cell = pill_buttons(., colors = "orange", bold_text = TRUE)
+      ),
+      Pass = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          number_fmt = scales::percent,
+          text_position = 'outside-end',
+          max_value = 1,
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      ),
+      Possession = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          number_fmt = scales::percent,
+          text_position = 'outside-end',
+          max_value = 1,
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      )
+    )
+  )
+```
+## Conclusiones
+De los datos que se mostraron a lo largo del proyecto, se realizó distintos apuntes a medida que transcurría el mundial para complementar el análisis, también se comprobó datos de algunos sitios web para corroborar la información. En este sentido, de los datos que extrajimos se pudo realizar datos estadísticos breves que nos permitió promediar y comprobar frecuencias, gracias a la herramienta de `dplyr` y `ggplot` se pudo combinar la preparación de los datos con las visualizaciones despertando el interés en el catálogo de gráficos que esta herramienta ofrece. Vinculado a esto, una de las limitaciones se encontró con la librería `reactable` en el cual no se logró ordenar por partidos y asistencia a los jugadores mostrando de modo desordenado el orden de la tabla. Entre los principales hallazgos del proyecto se podría concluir que obtener la data de una forma tan específica como la hallada en **[kaggle](https://www.kaggle.com/)** fue una decisión acertada. Esto es debido al fácil acceso al mismo. Ya, por último, se puede concluir que los principales objetivos trazados fueron logrados y a medida que el torneo avanzaba se logró obtener mas datos y una mejor organización de las ideas permitiéndonos explorar mejor `R` para la ciencia de datos.
+ 
+## Recursos
+En caso de querer conocer más sobre la dataset utilizada a través de los siguientes sitios web podrás adquirirla:
+https://www.kaggle.com/datasets/parasharmanas/qatar-2022-fifa-world-cup-attendance?select=Attendance+Sheet.csv
+https://www.kaggle.com/datasets/hafizsyedalihamdani/fifa-world-cup-2022?select=Team+Penalties+Scored.csv
+https://www.kaggle.com/datasets/ahmedtarek26/fifa-world-cup-qatar-2022?select=the-final.csv
+https://www.kaggle.com/datasets/mirapelmahmud2017/fifa-worldcup-2022-all-information
+https://www.kaggle.com/datasets/parasharmanas/qatar-2022-fifa-world-cup-attendance

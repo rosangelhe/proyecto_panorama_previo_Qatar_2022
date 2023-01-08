@@ -657,36 +657,174 @@ ggplot(map_fra) +
   theme_pitch() +
   theme(panel.background = element_rect(fill = "#186d33"))
 #----------------------------------------------------------------------------------------
-# 22 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
-#----------------------------------------------------------------------------------------
-# 23 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
-#----------------------------------------------------------------------------------------
-# 24 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+# 25 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+test_data <- penaltis_final_a %>%
+  merge(penaltis_final_s) %>%
+  add_column(
+    Flag = "",
+    `Red cards` = 0,
+    `Yellow cards` = 0,
+    `Fouls` = 0,
+    `Pass` = 0,
+    `Possession` = 0,
+    `Shots` = 0,
+    `Shots on target` = 0,
+    `Corners` = 0,
+    `Offside` = 0)
 
-# 25 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
 
-# 26 Faltas cometidas
-#----------------------------------------------------------------------------------------
-# 27 Efectividad de los pases
+test_data$`Red cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_red_cards
+test_data$`Yellow cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_Yellow_cards
+  
 
-# 28 Posesion de la pelota
+# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
 
-# 29 Tiros al arco / tiros de esquina
+test_data$`Red cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_red_cards
+test_data$`Yellow cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_Yellow_cards
 
-# 30 Cantidad de fuera de juegos (Offside)
+# Faltas cometidas
 
-#----------------------------------------------------------------------------------------
-# 31 Resultado final
+test_data$`Fouls`[test_data$Country == "Argentina"] = fouls$Home_team_Fouls
+test_data$`Fouls`[test_data$Country == "France"] = fouls$Away_team_Fouls
 
-# Resultado ronda de penales
+# Efectividad de los pases
 
-# Resultado entre los 90 min y la prorroga
-#----------------------------------------------------------------------------------------
-#32 Caracteristicas del Estadio
+test_data$`Pass`[test_data$Country == "Argentina"] = pass$Home_team_pass_accuracy
+test_data$`Pass`[test_data$Country == "France"] = pass$Away_team_pass_accuracy
 
-#comparacion con otros partidos y sacar:
-#cual fue el partido con mas aficionados
+# Posesion de la pelota
 
+test_data$`Possession`[test_data$Country == "Argentina"] = possession$Home_team_Possession
+test_data$`Possession`[test_data$Country == "France"] = possession$Away_team_Possession
 
+# Tiros al arco / tiros de esquina
 
-# 21 Cuales fueron los estadios con mas asistencia?
+test_data$`Shots`[test_data$Country == "Argentina"] = shots$Home_team_shots
+test_data$`Shots on target`[test_data$Country == "Argentina"] = shots$`Home_team_(Shots_on_target)`
+test_data$`Shots`[test_data$Country == "France"] = shots$Away_team_shots
+test_data$`Shots on target`[test_data$Country == "France"] = shots$`Away_team_(Shots_on_target)`
+
+# Cantidad de fuera de juegos (Offside)
+
+test_data$`Offside`[test_data$Country == "Argentina"] = offside$Home_team_offsite
+test_data$`Offside`[test_data$Country == "France"] = offside$Away_team_offsite
+
+test_data <- test_data[, c(6, 1, 2, 3, 7, 8, 10, 14, 9, 15, 11, 12, 13, 4, 5)]
+
+test_data %>%
+  mutate(
+    Flag = ifelse(Country == "France",
+                  "https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg",
+                  "https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg")) %>%
+  reactable(
+    .,
+    theme = fivethirtyeight(centered = TRUE, header_font_size = 11),
+    pagination = FALSE,
+    showSortIcon = FALSE,
+    highlight = TRUE,
+    compact = FALSE,
+    defaultSorted = "Rank",
+    defaultSortOrder = "asc",
+    columnGroups = list(
+      colGroup(name = "Team Performance",
+               columns = c("Pass", "Possession", "Offside")),
+      colGroup(name = "Team Behavior",
+               columns = c("Red cards", "Yellow cards", "Fouls"))
+    ),
+    rowStyle = group_border_sort("Rank"),
+    columns = list(
+      Rank = colDef(
+        name = "Rank.",
+        maxWidth = 85,
+        style = group_merge_sort("Rank")
+      ),
+      Flag = colDef(
+        name = "",
+        maxWidth = 100,
+        sortable = FALSE,
+        cell = embed_img(.)
+      ),
+      Country = colDef(
+        minWidth = 100,
+        align = "left",
+        style = list(borderRight = "1px solid #777")
+      ),
+      `Games Played` = colDef(
+        maxWidth = 70,
+        align = "center",
+        style = list(borderRight = "1px solid #777")
+      ),
+      `Goal Against` = colDef(
+        maxWidth = 180,
+        cell = data_bars(., text_size = 13, box_shadow = TRUE)),
+      `Penalties Scored` = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          text_position = 'outside-end',
+          icon = 'circle',
+          icon_color = '#226ab2',
+          icon_size = 15,
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      ),
+      `Red cards` = colDef(
+        maxWidth = 80,
+        cell = pill_buttons(., colors = "red", bold_text = TRUE)
+      ),
+      `Yellow cards` = colDef(
+        maxWidth = 80,
+        cell = pill_buttons(., colors = "yellow", bold_text = TRUE)
+      ),
+      Fouls = colDef(
+        maxWidth = 55,
+        cell = pill_buttons(., colors = "orange", bold_text = TRUE)
+      ),
+      Pass = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          number_fmt = scales::percent,
+          text_position = 'outside-end',
+          max_value = 1,
+          icon = 'circle',
+          icon_color = '#226ab2',
+          icon_size = 15,
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      ),
+      Possession = colDef(
+        maxWidth = 180,
+        cell = data_bars(
+          .,
+          fill_color = '#226ab2',
+          background = '#FFFFFF',
+          bar_height = 7,
+          number_fmt = scales::percent,
+          text_position = 'outside-end',
+          max_value = 1,
+          icon = 'circle',
+          icon_color = '#226ab2',
+          icon_size = 15,
+          text_color = '#226ab2',
+          round_edges = TRUE
+        )
+      ),
+      Shots = colDef(
+        maxWidth = 55,
+        cell = color_tiles(., bias = 0.7, box_shadow = TRUE)
+      ),
+      Corners = colDef(
+        maxWidth = 
+      )
+    )
+  )
