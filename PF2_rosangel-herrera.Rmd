@@ -1,0 +1,617 @@
+---
+title: "“Informe Final”"
+author: "Rosangel Herrera, Daniel Bolivar"
+date: "2023-01-10"
+output: 
+   html_document:    
+    fig_height: 7
+    fig_width: 10
+    highlight: tango
+    theme: cerulean
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+<style type="text/css">
+  body{
+  font-size: 12pt;
+}
+</style>
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Métricas de interés de los equipos aspirantes a ganar la Copa del Mundo Qatar 2022
+
+![](https://www.freelogovectors.net/wp-content/uploads/2022/11/fifa_world_cup_2022_mascot_laeeb_logo-freelogovectors.net_.png){width=50%}
+
+El fútbol se consolida en la actualidad como el juego de pelota más popular del mundo, dada la simplicidad de sus reglas y la fácil maniobrabilidad del juego permite una mayor versatilidad al momento de elegir un lugar para jugar. En este sentido, el tema a abordar considera la variación del torneo a través de las ediciones anteriores y recorre el historial de las selecciones con mayor popularidad y éxitos, ya sea por su cantidad de goles o participaciones, así como las copas obtenidas. Asimismo, se busca resaltar los principales puntos clave de la edición realizada en Qatar 2022 que consolidaron el posicionamiento de los rivales que lograron llegar a la instancia final. Cabe destacar que esta edición fue uno de los acontecimientos deportivos más importantes de los últimos años, generando un gran interés en todo el mundo. En este informe, se respaldará mediante un análisis detallado de los principales datos arrojados en los diferentes choques entre las selecciones con el objetivo de conseguir una serie de perspectivas que busquen intuir mejor el cómo se desarrolló este evento tan importante. Al ser un evento tan significativo, implicó una cobertura mediática de gran magnitud desde meses antes de que iniciara el torneo. Al ser uno de los acontecimientos deportivos más seguidos y observados en todo el mundo, su impacto trasciende más allá del campo de juego. Y las controversias que envuelven la organización y ejecución del torneo, no exentan tanto a la FIFA como el anfitrión de críticas orientadas hacia los Derechos Humanos en Qatar, trato a los trabajadores extranjeros, mujeres y su posición sobre los derechos LGBT enalteciendo con este torneo las constantes críticas de una excusa de evento de Qatar “para mejorar su imagen". Otros han utilizado argumentos distintos en contra del anfitrión, como el clima intenso, la falta de cultura de fútbol y evidencias de sobornos y corrupción con la FIFA para afianzar su posición en contra del anfitrión del torneo. Como consecuencia, muchas personas que se suman en contra del mundial de Qatar 2022 han dejado de asistir al evento en modo de protesta, incluso algunos jugadores no asistieron al mundial para fijar su posición en contra de las condiciones en las que se organizó y ejecutó el evento. Por otra parte, desde una perspectiva deportiva esta edición fue suficientemente significativo al ser la última edición con la participación de varios jugadores catalogados como los más importantes de las últimas décadas, tales como _Lionel Messi, Cristiano Ronaldo, Neymar Jr., Ángel Di María_ son algunos de los que estarían disputando su último torneo mundialista por lo que involucran un emoción mayor por parte de los aficionados, asi como puntos estratégicos en el desempeño de sus respectivas selecciones en la contienda de consagrarse como campeones del mundo.
+
+
+![**Un hombre salta a la cancha en el partido de Portugal vs Uruguay para protestar con la bandera LGBT+. Además, porta una playera con el apoyo a las mujeres de Irán y para "Salvar Ucrania"**](https://s.yimg.com/ny/api/res/1.2/qrf4A6s_duEY8U3gJRxCNw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://s.yimg.com/os/creatr-uploaded-images/2022-11/8461dce0-6f7b-11ed-bda7-1fc658905c94){width=50%}
+
+**Fuente:[Twitter @Nacion321](https://twitter.com/Nacion321/status/1597331400780238848?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1597331400780238848%7Ctwgr%5E8cfe5dc1a3649ea4849386a33400019418f8ea62%7Ctwcon%5Es1_c10&ref_url=https%3A%2F%2Fes-us.deportes.yahoo.com%2Faficionado-bandera-lgbt-la-forma-en-la-que-un-aficionado-desafio-al-mundial-de-qatar-2022-004258331.html)**
+
+Dicho esto, la intención de desarrollar este proyecto se enfoca en presentar la actuación histórica de los equipos desde un punto de vista cuantitativo y contrastar esos resultados con su desempeño en Qatar 2022. Para ello, se utilizaron una serie de técnicas de análisis de datos para explorar el recorrido histórico de las selecciones, siendo la principal motivación de este tema la influencia del torneo dentro de la afición y de las naciones en relación con la copa del mundo. Es por ello, que nuestro principal objetivo consiste en la precisión de los datos y de resaltar las estadísticas posteriores al final del torneo. Sumado a ello, la relevancia de los datos y de las interrogantes a desarrollar, reside en contestar y visualizar las siguientes interrogantes **¿Cuáles son los equipos favoritos en el torneo?**, **¿Cuánto es el promedio de goles de las selecciones favoritas?**, **¿Cómo se comparan a otras selecciones?** Y, por último,**¿Cuáles son sus tendencias de juegos ganados y perdidos cuando son campeones?** Cuya premisa principal personifica un panorama general previo de las selecciones desde el inicio de la FIFA World Cup como torneo. Seguidamente, se toma en cuenta **¿Cuál es el promedio de edad entre las selecciones?** y concebir **¿Cuáles son las ligas y clubs con mayor influencia y/o participantes en el torneo?** De la misma manera, se evalúan el nivel deportivo individual ponderando los datos sobre **¿Quiénes fueron los goleadores del torneo?** y **¿Quién ganó el botín de oro?.** Así como **¿Quienes dieron más asistencia a gol en el torneo?** y la comprensión sobre **¿Cuáles fueron las selecciones con mayor cantidad de penales a favor y/o en contra durante todo el torneo?.** Cuyos datos facilitan una mayor exhibición sobre algunas tendencias en el estilo de juego de las selecciones de modo que refleje el triunfo de Argentina y las estadísticas claves tales como la posesión, efectividad de los tiros y pases dentro del partido final. Por lo tanto, se considera como título final del proyecto _Panorama previo y post mundial Qatar 2022._
+
+## Metodología
+
+Finalmente, como parte de los datos explorados se tomaron en cuenta una serie de datasets relacionadas con el mundial extraídos inicialmente del sitio web **[Mavenanalytics](https://www.mavenanalytics.io/blog/maven-world-cup-challenge)** y complementada de la plataforma **[Kaggle](https://www.kaggle.com/datasets/hafizsyedalihamdani/fifa-world-cup2022?select=Team+Penalties+Scored.csv)** en el cual concentra antecedentes posteriores a los juegos dado a las diferencias en los eventos y los datos tales como asistencias, penales marcados, cantidad de tarjetas y faltas cometidas, entre otras. Cuya fuente de recopilación de datos nace del Archivo de la Copa Mundial de la FIFA y RSSSF. Como parte de la metodología a utilizar en el procesamiento de los datos, tal como se mencionó anteriormente se parte de las estadísticas descriptivas con el cual se revisa una serie de datos para comprender las decisiones técnicas de los entrenadores y el estudio de las distribuciones de frecuencias mediante diversas tablas y representaciones gráficas para enmarcar un resumen breve de los sucesos dentro del campo. Como parte de la justificación metodológica, al indagar el conjunto de observaciones arrojadas en cada partido, se busca resumir la información contenida de ella, sin ir más allá de lo investigado con el fin de extraer los valores y elementos claves en el transcurso de los partidos y obtener un panorama general de las selecciones e individual de los jugadores mas destacados durante los 64 partidos.
+
+## Análisis
+
+En relación con a la indagación de los datos, se tomó como principal fuente de manipulación de datos la librería del `tidyverse` y `dplyr`, consecuentemente para dar apertura a la lectura de los archivos _.cvs_ y _xlsx_ del conjunto de datos, este se dio a través de las librerías `readr` y `readxl`. Finalmente, para dar representación gráfica a las interrogantes desarrolladas inicialmente `ggplot2` y `ggthemes` permitió una fácil elaboración de las distintas representaciones aportando una mejor interpretación de los datos asociados al proyecto. Simultáneamente, la librería `gganimate` suministró un plus a los gráficos al realizar animaciones que permiten detallar de modo dinámico los gráficos al lector. En cuanto a la elaboración de las tablas con un formato y estilo dinámico para el lector, `reactablefmtr` y `reactable` fueron las librerías claves para este proyecto. Ya, por último, para dar contexto e incluso representación gráfica de los pases en el campo de juego, `ggsoccer` como librería dio orden y ejecución al formato de la cancha.
+```{r}
+#instalar en caso de no poseer
+
+#install.packages("readr")
+#install.packages("ggthemes")
+#install.packages("gganimate")
+#install.packages("reactablefmtr")
+#install.packages("reactable")
+#install.packages("ggsoccer")
+
+library(tidyverse)#manejo de datos
+library(dplyr)
+library(readr)    #lectura de cvs
+library(readxl)   #lectura de xlsx
+library(ggplot2)  #Manejo de Grafico
+library(ggthemes) #Manejo de temas en graficos
+library(gganimate)#creacion de animaciones en graficos
+library(reactablefmtr) #mejora el estilo y el formato de las tablas 
+library(reactable) #mejora el estilo y el formato de las tablas 
+library(ggsoccer) #creacion de graficos de juego
+```
+
+Teniendo en cuenta el tópico del proyecto y las interrogantes planteadas, se cargaron un total de 11 archivos con una variedad de datos que van desde los partidos jugados en la copa mundial hasta un detalle de las selecciones, jugadores, ligas, faltas cometidas y penales concebidos. En este sentido, las variables que más destacan son: `Stage, Home Team`, `Away Team`, `Win Conditions`, `Year`, `Home Goals`, `Away Goals`, `FIFA Ranking`, `Team`, `Position`, `Player`, `League`, `Club`, `Age`, `Caps`, `Attendance`, `Penalties Scored`.
+```{r}
+#Carga de la base de datos en formato .CSV
+world_cup_matches <- read_csv("World+Cup/world_cup_matches.csv")
+X2022_world_cup_groups <- read_csv("World+Cup/2022_world_cup_groups.csv")
+X2022_world_cup_squads <- read_csv("World+Cup/2022_world_cup_squads.csv")
+attendance_Sheet <- read_csv("World+Cup/Attendance Sheet.csv")
+FIFA_WORLD_CUP_2022 <- read_excel("World+Cup/FIFA_WORLD_CUP_2022.xlsx")
+the_final <- read_csv("World+Cup//the-final.csv")
+player_Goals <- read_csv("World+Cup//Player Goals.csv")
+player_Assists <- read_csv("World+Cup//Player Assists.csv")
+team_Assists <- read_csv("World+Cup/Team Assists.csv")
+the_final <- read_csv("World+Cup/the-final.csv")
+team_Penalties_Scored <- read_csv("World+Cup/Team Penalties Scored.csv")
+
+```
+Considerando en primera instancia la premisa principal personificando un panorama general previo de cómo llegaron las selecciones al mundial, se toma en cuenta la cantidad de anotaciones por selección desde el primer torneo de la FIFA World Cup en 1930. Para ello, en la siguiente tabla dinámica se observa como en los primeros 5 lugares son liderados por *Brasil, Alemania, Argentina, Italia y Francia*. Cuyas anotaciones en condición de `Home` oscilan entre 81 y 176 en estas selecciones. Ya en la condición de `Away` las anotaciones fluctúan desde 120 a 229 anotaciones. A medida que transcurren las páginas de la tabla se observan todas los tantos de cada selección en el histórico de los mundiales de la FIFA de la data set `world_cup_matches` comprimiendo en los últimos lugares a las selecciones con menor cantidad de anotaciones.
+```{r}
+# 1 Cantidad de anotaciones por selección en el torneo FIFA World Cup desde el primer torneo oficial en Uruguay 1930
+# Separacion de la tabla por equipo segun los goles obtenidos en el torneo
+wcup_goal <- world_cup_matches[c("Home Team", "Home Goals","Away Goals", "Away Team")]
+
+#Creacion de una nueva columna en el data frame
+team_column <- c("Team", "Goals")
+
+#filtro y asignacion de goles obtenidos en condicion de Home dentro de team_column
+h_cup <- wcup_goal %>% 
+  group_by(`Home Team`) %>%
+  summarise(`Home Goals` = sum(`Home Goals`),
+            )
+colnames(h_cup) <- c("Team", "Home")
+
+#filtro y asignacion de goles obtenidos en condicion de Away dentro de team_column
+a_cup <- wcup_goal %>%
+  group_by(`Away Team`) %>%
+  summarise(`Away Goals` = sum(`Away Goals`),
+  )
+colnames(a_cup) <- c("Team", "Away")
+
+#Union y reodenamiento de las tablas de goles obtenidos en un orden descendente 
+total_gol <- merge(h_cup, a_cup, by = "Team", all = TRUE)
+total_gol$total <- total_gol$Home + total_gol$Away
+total_gol <- total_gol[with(total_gol, order(-total)), ]
+
+# Tabla 1 Tabla "Total de goles en todas las selecciones en el torneo FIFA World Cup 
+# desde el primer torneo oficial en Uruguay 1930"
+reactable(
+  total_gol,
+  defaultSorted = "total",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(total_gol, text_position = "outside-base")
+  )
+)
+```
+Con la finalidad de indagar **¿Cuáles son los equipos favoritos en el torneo?**para participar en la final. Y a su vez, la cantidad de anotaciones excluye a la selección de `Italia`, dado a que no logró clasificarse en el repechaje previo al torneo. Por lo cual, se anexa a la selección de `Inglaterra` como uno de los favoritos a llegar en a la final, si bien posee menos goles que su sucesor `España` con 8 tantos para la casa de apuestas **[Betfair](https://www.betfair.com/sport/football)** el día 23 de noviembre del 2022. Por lo cual, dentro los goles anotados por el top 5 de selecciones goleadores participantes en Qatar 2022, se encuentran `Brasil` con un total de 229 goles, `Argentina` con 137 seguido de `Francia` con 120 y `España` e `Inglaterra` con 99 y 91 goles respectivamente.
+```{r}
+# 2 Top 05 selecciones favoritas
+fav_teams <- c("Brazil", "Argentina", "France", "Spain", "England")
+total_top_5 <- total_gol %>%
+  filter(`Team` %in% fav_teams) %>%
+  select(Team, Home, Away, total)
+
+# GRAFICA 2 Top 5 selecciones favoritas
+ggplot(total_top_5, aes(x = reorder(Team, -total), y = total)) +
+  geom_segment(aes(x = reorder(Team, -total),
+                   xend = reorder(Team, -total),
+                   y = 0, yend = total),
+               color = "gray", lwd = 1) +
+  geom_point(size = 7.5, pch = 21, bg = 4, col = 1) +
+  geom_text(aes(label = total), color = "white", size = 3) +
+  xlab("Team") +
+  ylab("") +
+  coord_flip() +
+  theme_minimal() + #tema del grafico
+  shadow_mark() + #sombra de la animacion
+  enter_grow() + #animacion de crecimiento
+  transition_states(total, wrap = FALSE) + #transicion de la animacion
+  labs(title = "Top 05 de selecciones más goleadoras", #titulo del grafico
+       subtitle = "Qatar 2022", #subtitulo del grafico
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
+       tag = "Figura 1",
+       x = "Selecciones", #etiqueta del eje x
+       y = "Cantidad de Goles", #etiqueta del eje y
+  )
+```
+Acto seguido, en respuesta a **¿Cuánto es el promedio de goles de las selecciones favoritas?** La presente tabla y gráfica mantiene a la selección de `Brasil` con un mayor promedio de anotación de 2.1 por partido, seguido por `Francia` con promedio de 1.81 y `Argentina` con 1.69. Finalizando con `España` e `Inglaterra` cuyos promedios oscilan en 1.57 y 1.31 anotaciones.
+```{r}
+# 3 Filtro de datos "Promedio de goles anotados en todas sus participaciones en
+#el torneo dentro de los cinco (5) equipos favoritos para participar a 
+#la final de Qatar 2022 segun la casa de apuesta betfair"
+top_fav <- total_gol %>% 
+  filter(`Team` %in% fav_teams) %>%
+  select(Team, Home, Away, total)
+
+#conteo de todos los partidos jugados de las seleciones favoritas
+home_matches <- world_cup_matches %>%
+  select(Year, `Home Team`, `Home Goals`) %>%
+  rename(Team = `Home Team`, Goals = `Home Goals`)
+away_matches <- world_cup_matches %>%
+  select(Year, `Away Team`, `Away Goals`) %>%
+  rename(Team = `Away Team`, Goals = `Away Goals`)
+all_matches <- rbind(home_matches, away_matches) %>% 
+  filter(`Team` %in% fav_teams) %>%
+  select(Team) %>%
+  add_count(`Team`, name = "Matches") %>%
+  unique()
+top_fav <- left_join(top_fav, all_matches, by = "Team") #union de tablas
+top_fav$avg <- top_fav$total/top_fav$Matches #calculo de promedio de goles
+
+# Tabla 3 Promedio de goles anotados en todas sus participaciones en
+#el torneo dentro de los cinco (5) equipos favoritos para participar a 
+#la final de Qatar 2022 segun la casa de apuesta betfair"
+reactable(
+  top_fav,
+  defaultSorted = "avg",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(top_fav, text_position = "outside-base")
+  )
+)
+
+# GRAFICA 4 promedio de goles anotados en todas sus participaciones en
+#el torneo dentro de los cinco (5) equipos favoritos para participar a 
+#la final de Qatar 2022 segun la casa de apuesta betfair"
+top_fav %>% 
+  ggplot(aes(x = `Team`, y = `avg`, fill = `Team`)) +
+  geom_col() +
+  scale_fill_manual(values = c("cadetblue1", "seagreen3", "seashell1", "steelblue", "tomato2"), name = "Top 5") +
+  geom_text(aes(label = round(avg, digits = 2)), vjust = -1) +
+  xlab("Team") +
+  ylab("") +
+  theme_minimal() +
+  labs(title = "Promedio de goles anotado en todas sus participaciones en el",
+       subtitle = "torneo dentro de los 05 equipos favoritos a participar a la final de Qatar 2022",
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
+       tag = "Figura 2",
+       x = "Selecciones",
+       y = "Promedio de Goles",
+  )
+```
+Con motivo de intuir **¿Cómo se comparan a otras selecciones?**el Ranking FIFA como sistema de clasificación oficial en su última publicación previo al torneo y de los datos otorgados en la dataset `X2022_world_cup_groups` permite realizar tal comparación, por lo que se extrajo la posición de las 32 selecciones que participaron en el evento y su respectivo grupo de cara a la fase de grupos. De acuerdo con el listado, las principales selecciones en encabezar la lista son: `Brasil`, `Bélgica`, `Argentina`, `Francia` e `Inglaterra`.
+```{r}
+# 4 ranking FIFA de como inician al mundial las 32 selecciones
+r_fifa22 <- X2022_world_cup_groups
+r_fifa22 <- r_fifa22[with(r_fifa22, order(r_fifa22$`Group`)), ] 
+
+# Tabla 5 ranking FIFA de como inician al mundial las 32 selecciones
+reactable(
+  r_fifa22,
+  defaultSorted = "FIFA Ranking",
+  defaultSortOrder = "asc",
+  defaultColDef = colDef(
+    cell = data_bars(r_fifa22, text_position = "outside-base")
+  )
+)
+```
+Según el sitio web **[Bendito Futbol](https://www.benditofutbol.com/futbol-internacional/ranking-fifa-cabeza-de-serie-calculos.html)** los criterios para calcular los puntos del ranking consisten en: 
++ Victoria, empate o derrota (3, 1 o 0 puntos, respectivamente)
++ Estatus del partido (coeficiente de multiplicación entre 1 y 4)
++ Fuerza del oponente (coeficiente de multiplicación entre 50 y 200)
++ Fuerza de la confederación del equipo (coeficiente de multiplicación entre 0,85 y 1,00).
+```{r}
+# Grafica 6 ranking FIFA de como inician al mundial las 32 selecciones
+ggplot(r_fifa22, aes(y = Team, x = `FIFA Ranking`, color = `Group`, fill = `Group`)) +
+  geom_bar(stat = 'identity', width = 0.5, alpha = 0.25) +
+  geom_text(aes(label = `FIFA Ranking`), hjust = -1) +
+  theme_minimal() +
+  facet_wrap(~Group, scales = "free_y") +
+  labs(title = "Ranking FIFA de las selecciones que disputaran en",
+       subtitle = "Qatar 2022",
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
+       tag = "Figura 3",
+       y = "Selecciones",
+       x = "Posicion FIFA Ranking"
+  )
+```
+En este caso, solo se tomará en cuenta los datos de la data set suministrado por Mavenanalytics en donde previamente describe los datos de la tabla y en la siguiente gráfica se exponen las 32 selecciones participantes en el torneo según su grupo en el torneo y número de posición en el Ranking. Continuando con el análisis de los datos, se reflexiona en la siguiente tabla todos los juegos ganados, perdidos y empatados en el registro de los mundiales. Otorgando a su vez, la combinación de las tablas para agrupar cada resultado a su respectiva selección. Como se observa, de todas las selecciones que han participado en el mundial, `Brasil` sigue liderando en la cantidad de partidos ganados, consecutivamente de `Alemania` e `Italia`.
+```{r}
+# 5 Resultados de historicos de juegos en la historia del FIFA World Cup
+#Funcion comun para limpiar la data
+merge_matches <- function(df, f, cols) { # a traves de la funcion se obtiene los partidos ganados, perdidos y empatados
+  temp <- df
+  temp_cols <- c("Team", "Matches") 
+  
+  temp1 <- temp %>% 
+    group_by(`Home Team`) %>%
+    summarise(`Home Goals` = sum(f(`Home Goals`, `Away Goals`)), )
+  colnames(temp1) <- temp_cols
+  
+  temp2 <- temp %>% 
+    group_by(`Away Team`) %>%
+    summarise(`Away Goals` = sum(f(`Away Goals`, `Home Goals`)), )
+  colnames(temp2) <- temp_cols
+  
+  total <- merge(temp1, temp2, by = "Team", all = TRUE)
+  total$Matches <- total$Matches.x + total$Matches.y
+  total <- total[with(total, order(-Matches)), ]
+  total <- select(total, Team, Matches)
+  colnames(total) <- cols
+  total
+}
+
+#  filtro cantidad de partidos ganados por seleccion e instancias que llegaron
+total_wins <- merge_matches(world_cup_matches, `>`, c("Team", "Wins"))
+
+#filtro cantidad de partidos empatados por seleccion e instancias que llegaron
+total_ties <- merge_matches(world_cup_matches, `==`, c("Team", "Ties"))
+
+#filtro cantidad de partidos perdidos por seleccion e instancias que llegaron
+total_loss <- merge_matches(world_cup_matches, `==`, c("Team", "Loss"))
+
+#Combinacion de tablas
+all_matchs <- left_join(total_wins, total_ties, by = "Team") %>%
+  left_join(total_loss, by = "Team")
+
+#Resultados de historicos de juegos en la historia del FIFA World Cup
+all_WC <- select(all_matchs, Team, Wins, Ties, Loss)
+
+# Tabla 7 Tabla de Resultados de historicos de juegos en la historia del FIFA World Cup
+reactable(
+  all_WC,
+  defaultSorted = "Wins",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(all_WC, text_position = "outside-base")
+  )
+)
+```
+Al momento de reducir la tabla anterior por las selecciones participantes en Qatar 2022 se observa una diferencia en el tercer lugar, tomando lugar la selección de argentina dado a que la selección de Italia no logró clasificarse en las últimas eliminatorias.
+```{r}
+# 6 Resultados de historicos de juegos en la historia de los 32 equipos participantes 
+#en Qatar 2022
+q_2022 <- all_WC %>% #filtro de las selecciones
+  filter(`Team` %in% c("Qatar", "Germany", "Denmark", "Brazil", "France",
+                       "Belgium", "Croatia", "Spain", "Serbia", "England", "Switzerland", "Netherlands", 
+                       "Argentina", "Iran", "South Korea", "Japan", "Saudi Arabia", "Ecuador",
+                       "Uruguay", "Canada","Ghana", "Senegal", "Portugal", "Poland", "Tunisia", 
+                       "Morocco", "Cameroon","Mexico", "United States", "Wales", "Australia", 
+                       "Costa Rica")) %>%
+  select(Team, Wins, Ties, Loss)
+
+#Anexion de la seleccion de Qatar dado a que es su primera participacion en este torneo
+q_2022 <- q_2022 %>%
+  rows_upsert(data.frame(Team = "Qatar", Wins = 0, Ties = 0, Loss = 0))
+
+# Tabla 8 Resultados de historicos de juegos en la historia de los 32 equipos participantes 
+#en Qatar 2022
+reactable(
+  q_2022,
+  defaultSorted = "Wins",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(q_2022, text_position = "outside-base")
+  )
+)
+
+```
+Siguiendo la narrativa del informe, a nivel gráfico se contrasta entre los cuatros principales favoritos el número de anotaciones y partidos ganados para observar con mayor precisión las tendencias de los favoritos o comúnmente considerados como equipos “fuertes” según sus participaciones dentro del torneo.
+```{r}
+# 7 comparacion entre los candidatos fuertes dado a la cantidad de goles y de partidos ganados
+top_4 <- total_wins$Team[1:4] #en este caso se obtienen a los 4 candidatos fuertes
+home_matches <- world_cup_matches %>%
+  select(Year, `Home Team`, `Home Goals`) %>% #luego se obtienen los goles obtenidos segun su condicion
+  rename(Team = `Home Team`, Goals = `Home Goals`)
+away_matches <- world_cup_matches %>%
+  select(Year, `Away Team`, `Away Goals`) %>%
+  rename(Team = `Away Team`, Goals = `Away Goals`)
+all_matches <- rbind(home_matches, away_matches)
+
+# Grafica 9 comparacion entre los candidatos fuertes dado a la cantidad de goles y de partidos ganados
+all_matches %>%
+  filter(`Team` %in% top_4) %>%
+  group_by(`Team`, `Year`) %>%
+  summarise(`Goals` = sum(Goals)) %>%
+  ggplot(aes(x = factor(Year), y = Goals, color = Team, fill = Team)) +
+  geom_bar(stat = "identity", width = 0.5, alpha = 0.15) +
+  geom_text(aes(label = Goals), vjust = -1) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45)) +
+  ggtitle("Comparacion entre los 4 principales participantes", "Por pais") +
+  facet_wrap(~ Team)
+```
+Tal como se ha ido comentando la selección de `Alemania` y `Brasil` siguen liderando en cuanto al éxito de goles y partidos ganados en cada participación del torneo respaldando su posición como candidato a llegar a la final del torneo. Cabe acotar que durante el periodo de 1938 – 1950 no hubo actividad en materia de mundial dado al panorama de guerra y de reconstrucción económica en Europa. Sin embargo, en cuanto a partidos jugados en finales, la selección de `Alemania` posee un mayor número de participaciones seguido de `Brasil` e `Italia`. Como hecho curioso, la selección `Argentina` no posee participación en terceros lugares a diferencia de sus pares. Por último, hay que tomar en cuenta que las primeras cinco fases de la gráfica obedecen a los primeros formatos de organización de la World Cup como se verá a continuación.
+```{r}
+# 8 ultimas posiciones logradas de esos candidatos en mundiales anteriores
+top_4 <- total_wins$Team[1:4]
+home_matches_by_stage <- world_cup_matches %>%
+  select(Year, `Home Team`, `Stage`) %>%
+  rename(Team = `Home Team`)
+away_matches_by_stage <- world_cup_matches %>%
+  select(Year, `Away Team`, `Stage`) %>%
+  rename(Team = `Away Team`)
+all_matches_by_stage <- rbind(home_matches_by_stage, away_matches_by_stage)
+
+stages <- c("First group stage",
+            "Second group stage",
+            "First round",
+            "Final round",
+            "Group stage",
+            "Round of 16",
+            "Quarter-finals",
+            "Semi-finals",
+            "Third place",
+            "Final"
+            )
+# Grafica 10 posiciones logradas de esos candidatos en mundiales anteriores
+all_matches_by_stage %>%
+  filter(`Team` %in% top_4) %>%
+  group_by(`Team`, `Year`, `Stage`) %>%
+  distinct() %>%
+  ggplot(aes(x = factor(Stage, levels = stages), color = Team, fill = Team)) +
+  geom_bar(width = 0.5, alpha = 0.15) +
+  geom_text(stat = "count", aes(label = after_stat(count)), vjust = -1) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45)) +
+  ggtitle("Comparacion entre 4 principales participantes", "Por pais") +
+  facet_wrap(~ Team)
+```
+En cuanto a **¿Cuáles son los anteriores campeones del torneo?** se puede deducir que a pesar de los datos y las estadísticas que se puede visualizar, los ganadores del torneo en ediciones pasadas se resumen en 8 selecciones, liderada como en diversas ocasiones del proyecto por Brasil con 5 copas obtenidas, seguido por Alemania e Italia con 4 copas para los tres primeros lugares de máximas copas concebidas tal como se puede observar en la gráfica. En el resto de las posiciones se encuentran Argentina, Francia y Uruguay con 2 copas e Inglaterra y España con 1.
+```{r}
+# 9 ganadores de la copa
+#lista de paises que participaron en las finales
+final_rounds <- world_cup_matches %>% 
+  filter(`Stage` == "Final round") %>%
+  select(`Year`, `Home Team`, `Away Team`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`)
+final_round <- tail(final_rounds, n = 1) 
+
+finals <- world_cup_matches %>%
+  filter(`Stage` == "Final") 
+finals_home <- finals %>%
+  filter(`Home Goals` > `Away Goals` | `Home Goals` == `Away Goals`) %>%
+  select(`Year`, `Home Team`, `Away Team`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`)
+finals_away <- finals %>%
+  filter(`Away Goals` > `Home Goals`) %>%
+  select(`Year`, `Home Team`, `Away Team`) %>%
+  rename(Team = `Away Team`, Against = `Home Team`)
+all_finals <- rbind(finals_home, finals_away, final_round) %>%
+  add_count(`Team`, name = "Times")
+
+# Grafica 11 ganadores de la copa
+all_finals %>%
+  select(`Team`, `Times`) %>%
+  unique() %>%
+  arrange(Times) %>%
+  ggplot(aes(x = reorder(Team, -Times), y = Times, color = Team, fill = Team, reorder(Team, Times))) +
+  geom_bar(stat = "identity", width = 0.5, alpha = 0.15) +
+  geom_text(aes(label = Times), vjust = -1) +
+  theme_minimal() +
+  ggtitle("Copas ganadas", "Por pais")
+```
+Y, por último para culminar con el panorama general de las selecciones se responde **¿Cuál es el promedio de edad entre las selecciones?** y **¿Cuáles son las ligas y clubes con mayor influencia y/o participantes en el torneo?** En primera instancia se observa dentro de una tema las variables `Team`, `Position`, `Player` y `Age` las características de todos los jugadores en las 32 selecciones. En el cual, dentro de la gráfica de línea la edad promedio y las selecciones con el cual el equipo con mayor promedio de edad es `Irán` y `México` en cuanto a las selecciones más jóvenes son lideradas por `Estados Unidos` y `España`.
+```{r}
+# 10 promedio de edad de las selecciones
+# Extraccion de plantillas
+wcup_age <- X2022_world_cup_squads[c("Team", "Position", "Player", "Age")]
+
+age_cup <- wcup_age %>%
+  group_by(`Team`) %>%
+  summarize(mean(Age))
+
+colnames(age_cup) <- c("Team", "Age")
+
+# Tabla 12 Edad de los jugadores en sus selecciones
+wcup_age$Player <- enc2utf8(wcup_age$Player)
+wcup_age$Player <- iconv(wcup_age$Player, "UTF-8", "UTF-8", sub = '')
+reactable(wcup_age, filterable = TRUE, minRows = 10)
+
+# Grafica 13 Promedio de edad de las selecciones
+ggplot(age_cup, aes(x = `Team`, group = 1)) + 
+  geom_line(aes(y = Age)) + 
+  labs(title = "Promedio de edad de las selecciones", 
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF", 
+       y = "Edad Promedio",
+       x = "Selecciones") +  # title and caption
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+        panel.grid.minor = element_blank())  # turn off minor grid
+```
+Consecuentemente, en las siguientes tablas se puede observar la frecuencia de jugadores participantes en cada club y liga, liderando el Bayern Múnich de la Bundesliga con 17 seleccionados, seguido del Manchester City con 16 y España con 16. Dejando en relieve la consistencia de estos equipos y ligas en el mundo y la popularidad que transmite fuera de Europa.
+```{r}
+# 11 Ligas y Clubs con mayor influencia
+# clubs con mayor influencia
+fc_league <- X2022_world_cup_squads
+fc_league <- fc_league %>% # creacion de tabla de frecuencia variable cualitativa
+  group_by(League, Club) %>% 
+  summarise(frequency = n())
+
+fc_league <- fc_league[with(fc_league, order(-frequency)), ] #ajuste de orden descendiente
+
+# ligas con mayor influencia
+fc_league1 <- fc_league %>% 
+  summarize(frecuency = sum(frequency))
+
+fc_league1 <- fc_league1[with(fc_league1, order(-frecuency)), ] #ajuste de orden descendiente
+
+# Tabla 14 Ligas y Clubs con mayor influencia
+fc_league$Club <- enc2utf8(fc_league$Club)
+fc_league$Club <- iconv(fc_league$Club, "UTF-8", "UTF-8", sub = '')
+reactable(fc_league, filterable = TRUE, minRows = 10)
+```
+Del mismo modo, siguiendo con la tendencia de las influencias de las ligas, el liderato con 158 jugadores es de la Premier League de Inglaterra, en el segundo puesto lo ocupa La Liga de España y, en tercer lugar, la Bundesliga de Alemania.
+```{r}
+# Tabla 15 ligas con mayor influencia 
+fc_league1$League <- enc2utf8(fc_league1$League)
+fc_league1$League <- iconv(fc_league1$League, "UTF-8", "UTF-8", sub = '')
+reactable(fc_league1, filterable = TRUE, minRows = 10)
+```
+Ya finalizada la copa mundial, recapitular los datos individuales de los seleccionados a través de la competición y un análisis detallado de los eventos observados en una de las finales más polémicas y vistas en los últimos tiempos. Si bien ya conocemos quien se coronó campeón conocer los reconocimientos individuales y las infracciones sancionadas mediante el punto penal. Como punto inicial, se responde **¿Quiénes fueron los goleadores del torneo?** Liderado por el delantero de francés Kylian Mbappé con 8 goles en 7 partidos siendo este el ganador del botín de oro, en segundo lugar el ya reconocido Lionel Messi con 7 goles en 7 partidos. Finalmente, en tercer lugar el joven delantero argentino Julián Álvarez.
+```{r}
+# 12 ¿Quienes fueron los Goleadores del torneo? - ¿Quien gano el botin de oro?
+player_Goals <- na.omit(player_Goals)
+head(player_Goals)
+
+# 13 Promedio de goles por partido
+player_Goals$mean_goals <- round(player_Goals$Goals / player_Goals$`Games Played`, 1) #agregado de columna
+
+# Tabla 16 ¿Quienes fueron los Goleadores del torneo? / Promedio de goles por partido
+reactable(
+  player_Goals,
+  defaultSorted = "Goals",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(player_Goals, text_position = "outside-base")
+  )
+)
+```
+
+![**Mbappé jugador con más goles del Mundial.**](https://s3.us-west-2.amazonaws.com/s3.laprensa.com.ni-bq/wp-content/uploads/2022/12/000_334P68J-1000x600.jpg){width=50%}
+
+Ahora bien, sobre **¿Quienes dieron más asistencia a gol en el torneo?** destaca el delantero Lionel Messi con 3 asistencias, seguido del croata Iván Perisic y el Francés Antoine Griezmann. En la siguiente tabla se observa con mayor precisión el resto de las asistencias por nombre del jugador y partidos.
+```{r}
+# 14 ¿Quienes dieron mas asistencia a gol en el torneo?
+head(player_Assists)
+# Tabla 17 ¿Quienes dieron mas asistencia a gol en el torneo?
+reactable(
+  player_Assists,
+  defaultSorted = "Assists",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(player_Assists, text_position = "outside-base")
+  )
+) 
+```
+
+![**Messi jugador con más asistencias del Mundial.**](https://phantom-marca.unidadeditorial.es/d3e9e7233a37f67e541066ab6cd1a581/resize/1320/f/jpg/assets/multimedia/imagenes/2022/12/18/16713921967768.jpg){width=50%}
+
+Si bien, dentro de este apartado se resalta a los individuos. A nivel de selecciones el número de asistencias del conjunto consiente al resultado final, tal como se observa en la tabla inferior no es sorpresa que la selección francesa lidere la cantidad de asistencias y de goles, sobre todo entendiendo su rol de finalista y de vigente campeón en el transcurso del mundial. No obstante, en el segundo lugar se encuentra la selección de `Inglaterra` seguido de `Portugal` por lo que, a hechos relevantes, la selección de `Argentina` bajo su rol de finalista se encuentra en un lejano sexto lugar, teniendo menor efectividad que sus antecesores al momento de finiquitar el juego.
+```{r}
+# 15 Equipos con mayor numero de asistencias
+head(team_Assists)
+
+# Tabla 18 Equipos con mayor numero de asistencias
+reactable(
+  team_Assists,
+  defaultSorted = "Assists",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(team_Assists, text_position = "outside-base")
+  )
+)
+```
+Como otro hecho curioso, la selección con mayor cantidad de penales a favor fue la selección Argentina con 4 penales anotados, seguido por Portugal y Francia con 2 tantos. Tal como se refleja en la tabla las demás selecciones beneficiadas. En cuanto a las selecciones más afectadas por penales pitados en contra, la tabla se encuentra liderada por Francia y Argentina con 8 tantos, seguido por la selección de Irán con 7, dejando vislumbrar las fallas defensivas durante el torneo y en cómo dos de los finalistas encabezan la tabla. Esto con la finalidad de responder **¿Cuáles fueron las selecciones con mayor cantidad de penales a favor y/o en contra durante todo el torneo?.**
+```{r}
+# 16 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
+team_Penalties_Scored
+
+# 17 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+wcup_penaltis_s <- team_Penalties_Scored %>%
+  select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
+
+# 18 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+wcup_penaltis_a <- team_Penalties_Scored %>%
+  select(`Country`, `Rank`, `Games Played`, `Goal Against`)
+
+# Tabla 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+reactable(
+  wcup_penaltis_s,
+  defaultSorted = "Penalties Scored",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(wcup_penaltis_s, text_position = "outside-base")
+  )
+) 
+
+# Grafica 20 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+ggplot(wcup_penaltis_s, aes(x = `Country`, group = 1)) + 
+  geom_line(aes(y = `Penalties Scored`)) + 
+  labs(title = "Selecciones con mayor cantidad de penales a favor durante todo el torneo", 
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF", 
+       y = "Penales a Favor",
+       x = "Selecciones") +  # title and caption
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+        panel.grid.minor = element_blank())  # turn off minor grid
+
+# Tabla 21 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+reactable(
+  wcup_penaltis_a,
+  defaultSorted = "Goal Against",
+  defaultSortOrder = "desc",
+  defaultColDef = colDef(
+    cell = data_bars(wcup_penaltis_a, text_position = "outside-base")
+  )
+)
+
+# Grafica 22 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+wcup_penaltis_a %>% 
+  ggplot(aes(x = `Country`, y = `Goal Against`, fill = `Country`)) +
+  geom_col() +
+  geom_text(aes(label = round(`Goal Against`, digits = 2)), vjust = -1) +
+  xlab("Country") +
+  ylab("") +
+  theme_minimal() +
+  labs(title = "Selecciones con mayor cantidad de penales en contra durante todo el torneo",
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
+       x = "Selecciones",
+       y = "Penales en Contra",
+  )
+```
+Ahora bien, definido el panorama general de las selecciones antes del mundial y el rendimiento individual de los jugadores, así como datos relevantes relacionados con las asistencias y penales, es preciso realizar un breve análisis sobre qué sucedió en el juego final del mundial protagonizado por Argentina y Francia. Si bien, todos conocemos el resultado en la siguiente gráfica se observa como los tiros y ataques de la selección Argentina se dieron por el costado izquierdo guiado por Ángel Di María y un gol desde el punto penal de Lionel Messi.
+```{r}
+# 19 Mapa de tiros y pases
+map_arg <- the_final %>%
+  filter(Team %in% c("ARG"))
+
+map_fra <- the_final %>%
+  filter(Team %in% c("FRA"))
+# Grafica 23 tiros y pases a gol de la seleccion Argentina
+ggplot(map_arg) +
+  annotate_pitch(fill = "#1b893e", colour = "white") +
+  geom_segment(aes(x = X, y = Y, xend = X2, yend = Y2),
+               arrow = arrow(length = unit(0.3, "cm"), type = "closed")) +
+  theme_pitch() +
+  theme(panel.background = element_rect(fill = "#186d33"))
+```
+En el caso de la selección de Francia, tal como se observa el ataque se orientó en el costado izquierdo al igual que la selección Argentina protagonizado por Kylian Mbappé como centro delantero ejecutando dos penales a favor y un gol al centro de la red.
+```{r}
+# 19 Mapa de tiros y pases
+map_fra <- the_final %>%
+  filter(Team %in% c("FRA"))
+# Grafica 24 tiros y pases a gol de la seleccion Francesa
+ggplot(map_fra) +
+  annotate_pitch(fill = "#1b893e", colour = "white") +
+  geom_segment(aes(x = X, y = Y, xend = X2, yend = Y2),
+               arrow = arrow(length = unit(0.3, "cm"), type = "closed")) +
+  theme_pitch() +
+  theme(panel.background = element_rect(fill = "#186d33"))
+```
+

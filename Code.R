@@ -67,7 +67,7 @@ total_gol <- total_gol[with(total_gol, order(-total)), ]
 
 #-----------------------------------------------------------------------------#
 
-# 2 Top 05 selecciones más goleadoras
+# 2 Top 05 selecciones favoritas
 fav_teams <- c("Brazil", "Argentina", "France", "Spain", "England")
 total_top_5 <- total_gol %>%
   filter(`Team` %in% fav_teams) %>%
@@ -386,7 +386,7 @@ reactable(
   )
 )
 
-# GRAFICA 2 Top 5 selecciones más goleadoras
+# GRAFICA 2 Top 5 selecciones favoritas
 
 ggplot(total_top_5, aes(x = reorder(Team, -total), y = total)) +
   geom_segment(aes(x = reorder(Team, -total),
@@ -496,7 +496,6 @@ reactable(
 )
 
 # Grafica 9 comparacion entre los candidatos fuertes dado a la cantidad de goles y de partidos ganados
-
 all_matches %>%
   filter(`Team` %in% top_4) %>%
   group_by(`Team`, `Year`) %>%
@@ -547,7 +546,7 @@ reactable(wcup_age, filterable = TRUE, minRows = 10)
 ggplot(age_cup, aes(x = `Team`, group = 1)) + 
   geom_line(aes(y = Age)) + 
   labs(title = "Promedio de edad de las selecciones", 
-       caption = "Fuente: Economics", 
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF", 
        y = "Edad Promedio",
        x = "Selecciones") +  # title and caption
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
@@ -610,9 +609,9 @@ reactable(
 # Grafica 20 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 ggplot(wcup_penaltis_s, aes(x = `Country`, group = 1)) + 
   geom_line(aes(y = `Penalties Scored`)) + 
-  labs(title = "Promedio de edad de las selecciones", 
-       caption = "Fuente: Economics", 
-       y = "Edad Promedio",
+  labs(title = "Selecciones con mayor cantidad de penales a favor durante todo el torneo", 
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSS", 
+       y = "Penales a Favor",
        x = "Selecciones") +  # title and caption
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
         panel.grid.minor = element_blank())  # turn off minor grid
@@ -636,8 +635,7 @@ wcup_penaltis_a %>%
   ylab("") +
   theme_minimal() +
   labs(title = "Selecciones con mayor cantidad de penales en contra durante todo el torneo",
-       caption = "Fuente: XXXX",
-       tag = "XXXX",
+       caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
        x = "Selecciones",
        y = "Penales en Contra",
   )
