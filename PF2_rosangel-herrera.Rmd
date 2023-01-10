@@ -325,7 +325,7 @@ reactable(
 )
 
 ```
-Siguiendo la narrativa del informe, a nivel gráfico se contrasta entre los cuatros principales favoritos el número de anotaciones y partidos ganados para observar con mayor precisión las tendencias de los favoritos o comúnmente considerados como equipos “fuertes” según sus participaciones dentro del torneo.
+Siguiendo la narrativa del informe, a nivel gráfico se contrasta entre los cuatros principales favoritos el número de anotaciones en cada mundial que participaron para observar con mayor precisión las tendencias de los favoritos o comúnmente considerados como equipos “fuertes” según sus participaciones dentro del torneo.
 ```{r}
 # 7 comparacion entre los candidatos fuertes dado a la cantidad de goles y de partidos ganados
 top_4 <- total_wins$Team[1:4] #en este caso se obtienen a los 4 candidatos fuertes
@@ -350,7 +350,7 @@ all_matches %>%
   ggtitle("Comparacion entre los 4 principales participantes", "Por pais") +
   facet_wrap(~ Team)
 ```
-Tal como se ha ido comentando la selección de `Alemania` y `Brasil` siguen liderando en cuanto al éxito de goles y partidos ganados en cada participación del torneo respaldando su posición como candidato a llegar a la final del torneo. Cabe acotar que durante el periodo de 1938 – 1950 no hubo actividad en materia de mundial dado al panorama de guerra y de reconstrucción económica en Europa. Sin embargo, en cuanto a partidos jugados en finales, la selección de `Alemania` posee un mayor número de participaciones seguido de `Brasil` e `Italia`. Como hecho curioso, la selección `Argentina` no posee participación en terceros lugares a diferencia de sus pares. Por último, hay que tomar en cuenta que las primeras cinco fases de la gráfica obedecen a los primeros formatos de organización de la World Cup como se verá a continuación.
+Tal como se ha ido comentando la selección de `Alemania` y `Brasil` siguen liderando en cuanto al éxito de goles y partidos en cada participación del torneo respaldando su posición como candidato a llegar a la final del torneo. Cabe acotar que durante el periodo de 1938 – 1950 no hubo actividad en materia de mundial dado al panorama de guerra y de reconstrucción económica en Europa. Sin embargo, en cuanto a partidos jugados en finales, la selección de `Alemania` posee un mayor número de participaciones seguido de `Brasil` e `Italia`. Como hecho curioso, la selección `Argentina` no posee participación en terceros lugares a diferencia de sus pares. Por último, hay que tomar en cuenta que las primeras cinco fases de la gráfica obedecen a los primeros formatos de organización de la World Cup como se verá a continuación.
 ```{r}
 # 8 ultimas posiciones logradas de esos candidatos en mundiales anteriores
 top_4 <- total_wins$Team[1:4]
