@@ -1,7 +1,7 @@
 ---
 title: "Informe Final"
 author: "Rosangel Herrera, Daniel Bolivar"
-date: "2023-01-10"
+date: "2023-01-14"
 output: 
    html_document: 
     code_folding: hide   
@@ -207,22 +207,6 @@ top_fav %>%
        y = "Promedio de Goles",
   )
 ```
-Con motivo de intuir **¿Cómo se comparan a otras selecciones?** el Ranking FIFA como sistema de clasificación oficial en su última publicación previo al torneo y de los datos otorgados en la dataset `X2022_world_cup_groups` permite realizar tal comparación, por lo que se extrajo la posición de las 32 selecciones que participaron en el evento y su respectivo grupo de cara a la fase de grupos. De acuerdo con el listado, las principales selecciones en encabezar la lista son: `Brasil`, `Bélgica`, `Argentina`, `Francia` e `Inglaterra`.
-```{r}
-# 4 ranking FIFA de como inician al mundial las 32 selecciones
-r_fifa22 <- X2022_world_cup_groups
-r_fifa22 <- r_fifa22[with(r_fifa22, order(r_fifa22$`Group`)), ] 
-
-# Tabla 5 ranking FIFA de como inician al mundial las 32 selecciones
-reactable(
-  r_fifa22,
-  defaultSorted = "FIFA Ranking",
-  defaultSortOrder = "asc",
-  defaultColDef = colDef(
-    cell = data_bars(r_fifa22, text_position = "outside-base")
-  )
-)
-```
 Según el sitio web **[Bendito Futbol](https://www.benditofutbol.com/futbol-internacional/ranking-fifa-cabeza-de-serie-calculos.html)** los criterios para calcular los puntos del ranking consisten en: 
 
 + Victoria, empate o derrota (3, 1 o 0 puntos, respectivamente)
@@ -230,6 +214,10 @@ Según el sitio web **[Bendito Futbol](https://www.benditofutbol.com/futbol-inte
 + Fuerza del oponente (coeficiente de multiplicación entre 50 y 200)
 + Fuerza de la confederación del equipo (coeficiente de multiplicación entre 0,85 y 1,00).
 ```{r}
+# 4 ranking FIFA de como inician al mundial las 32 selecciones
+r_fifa22 <- X2022_world_cup_groups
+r_fifa22 <- r_fifa22[with(r_fifa22, order(r_fifa22$`Group`)), ]
+
 # Grafica 6 ranking FIFA de como inician al mundial las 32 selecciones
 ggplot(r_fifa22, aes(y = Team, x = `FIFA Ranking`, color = `Group`, fill = `Group`)) +
   geom_bar(stat = 'identity', width = 0.5, alpha = 0.25) +
@@ -392,20 +380,20 @@ En cuanto a **¿Cuáles son los anteriores campeones del torneo?** se puede dedu
 #lista de paises que participaron en las finales
 final_rounds <- world_cup_matches %>% 
   filter(`Stage` == "Final round") %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Home Team`, Against = `Away Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Home Goals`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`, Goals = `Home Goals`)
 final_round <- tail(final_rounds, n = 1) 
 
 finals <- world_cup_matches %>%
   filter(`Stage` == "Final") 
 finals_home <- finals %>%
   filter(`Home Goals` > `Away Goals` | `Home Goals` == `Away Goals`) %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Home Team`, Against = `Away Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Home Goals`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`, Goals = `Home Goals`)
 finals_away <- finals %>%
   filter(`Away Goals` > `Home Goals`) %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Away Team`, Against = `Home Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Away Goals`) %>%
+  rename(Team = `Away Team`, Against = `Home Team`, Goals = `Away Goals`)
 all_finals <- rbind(finals_home, finals_away, final_round) %>%
   add_count(`Team`, name = "Times")
 
@@ -420,7 +408,17 @@ all_finals %>%
   theme_minimal() +
   ggtitle("Copas ganadas", "Por pais")
 ```
-Y, por último para culminar con el panorama general de las selecciones se responde **¿Cuál es el promedio de edad entre las selecciones?** y **¿Cuáles son las ligas y clubes con mayor influencia y/o participantes en el torneo?** En primera instancia se observa dentro de una tema las variables `Team`, `Position`, `Player` y `Age` las características de todos los jugadores en las 32 selecciones. En el cual, dentro de la gráfica de línea la edad promedio y las selecciones con el cual el equipo con mayor promedio de edad es `Irán` y `México` en cuanto a las selecciones más jóvenes son lideradas por `Estados Unidos` y `España`.
+Ya en la siguiente gráfica, podemos observar los años y la selección ganadora junto a la cantidad de goles obtenidos en el partido final de esa edición del torneo. En el cual, se ve una tendencia a marcar más de dos goles por partes de los campeones con una excepción muy particular en el año 1994 con la cuarta copa de `Brasil` cuyo enfrentamiento versus la selección de `Italia` terminó en un empate 0-0 y fue a través de las tandas de penales que este logró obtener el título cerrando el marcador en 0(3) – 0(2) en el torneo realizado en Estados Unidos.
+```{r}
+# Grafica 26 Goles de selecciones ganadoras segun la edicion
+all_finals %>%
+  select(`Team`, `Year`, `Goals`) %>%
+  ggplot(aes(y = `Goals`, x = factor(`Year`), color = `Team`, fill = `Team`)) +
+    geom_bar(stat = 'identity', width = 0.5, alpha = 0.25) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45))
+```
+Y, por último para culminar con el panorama general de las selecciones se responde **¿Cuál es el promedio de edad entre las selecciones?** y **¿Cuáles son las ligas y clubes con mayor influencia y/o participantes en el torneo?** En primera instancia se observa dentro de una tema las variables `Team`, `Position`, `Player` y `Age` las características de todos los jugadores en las 32 selecciones. En el cual, dentro de la gráfica de línea la edad promedio y las selecciones con el cual el equipo con mayor promedio de edad es `Irán` y `México` en cuanto a las selecciones más jóvenes son lideradas por `Ghana`, `Estados Unidos` y `España`.
 ```{r}
 # 10 promedio de edad de las selecciones
 # Extraccion de plantillas
@@ -438,13 +436,14 @@ wcup_age$Player <- iconv(wcup_age$Player, "UTF-8", "UTF-8", sub = '')
 reactable(wcup_age, filterable = TRUE, minRows = 10)
 
 # Grafica 13 Promedio de edad de las selecciones
-ggplot(age_cup, aes(x = `Team`, group = 1)) + 
-  geom_line(aes(y = Age)) + 
+ggplot(age_cup, aes(x = reorder(Team, Age), group = 1, color = Team, fill = Team)) + 
+  geom_col(aes(y = Age), width = 0.5) +
+  geom_text(aes(y = Age, label = round(Age, digits = 1)), vjust = -1, size = 2.5) +
   labs(title = "Promedio de edad de las selecciones", 
        caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF", 
        y = "Edad Promedio",
        x = "Selecciones") +  # title and caption
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.3),  # rotate x axis text
         panel.grid.minor = element_blank())  # turn off minor grid
 ```
 Consecuentemente, en las siguientes tablas se puede observar la frecuencia de jugadores participantes en cada club y liga, liderando el Bayern Múnich de la Bundesliga con 17 seleccionados, seguido del Manchester City con 16 y España con 16. Dejando en relieve la consistencia de estos equipos y ligas en el mundo y la popularidad que transmite fuera de Europa.

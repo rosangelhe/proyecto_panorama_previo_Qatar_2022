@@ -38,7 +38,7 @@ head(world_cup_matches)
 head(X2022_world_cup_squads)
 #----------- Parte I Limpieza y procesamiento de los datos -------------#
 
-# 1 Cantidad de anotaciones por selección en el torneo FIFA World Cup desde el primer torneo oficial en Uruguay 1930
+# 1 Cantidad de anotaciones por selecciC3n en el torneo FIFA World Cup desde el primer torneo oficial en Uruguay 1930
 
 # Separacion de la tabla por equipo segun los goles obtenidos en el torneo
 wcup_goal <- world_cup_matches[c("Home Team", "Home Goals","Away Goals", "Away Team")]
@@ -206,20 +206,20 @@ stages <- c("First group stage",
 #lista de paises que participaron en las finales
 final_rounds <- world_cup_matches %>% 
   filter(`Stage` == "Final round") %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Home Team`, Against = `Away Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Home Goals`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`, Goals = `Home Goals`)
 final_round <- tail(final_rounds, n = 1) 
 
 finals <- world_cup_matches %>%
   filter(`Stage` == "Final") 
 finals_home <- finals %>%
   filter(`Home Goals` > `Away Goals` | `Home Goals` == `Away Goals`) %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Home Team`, Against = `Away Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Home Goals`) %>%
+  rename(Team = `Home Team`, Against = `Away Team`, Goals = `Home Goals`)
 finals_away <- finals %>%
   filter(`Away Goals` > `Home Goals`) %>%
-  select(`Year`, `Home Team`, `Away Team`) %>%
-  rename(Team = `Away Team`, Against = `Home Team`)
+  select(`Year`, `Home Team`, `Away Team`, `Away Goals`) %>%
+  rename(Team = `Away Team`, Against = `Home Team`, Goals = `Away Goals`)
 all_finals <- rbind(finals_home, finals_away, final_round) %>%
   add_count(`Team`, name = "Times")
 #----------------------------------------------------------------------------------------
@@ -252,7 +252,7 @@ fc_league1 <- fc_league1[with(fc_league1, order(-frecuency)), ] #ajuste de orden
 
 # ------------- RESULTADOS POST MUNDIAL ---------------------------------
 
-# 12 ¿Quienes fueron los Goleadores del torneo? - ¿Quien gano el botin de oro?
+# 12 ?Quienes fueron los Goleadores del torneo? - B?Quien gano el botin de oro?
 player_Goals <- na.omit(player_Goals)
 
 head(player_Goals)
@@ -262,7 +262,7 @@ head(player_Goals)
 player_Goals$mean_goals <- round(player_Goals$Goals / player_Goals$`Games Played`, 1) #agregado de columna
 
 #----------------------------------------------------------------------------------------
-# 14 ¿Quienes dieron mas asistencia a gol en el torneo?
+# 14 B?Quienes dieron mas asistencia a gol en el torneo?
 head(player_Assists)
 
 #----------------------------------------------------------------------------------------
@@ -270,20 +270,20 @@ head(player_Assists)
 head(team_Assists)
 
 #----------------------------------------------------------------------------------------
-# 16 ¿Cuantos penales fueron concebidos a lo largo de todo el torneo?
+# 16 Cuantos penales fueron concebidos a lo largo de todo el torneo?
 team_Penalties_Scored
 
 #----------------------------------------------------------------------------------------
-# 17 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# 17 B?Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 wcup_penaltis_s <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
 #----------------------------------------------------------------------------------------
-# 18 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+# 18 B?Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 wcup_penaltis_a <- team_Penalties_Scored %>%
   select(`Country`, `Rank`, `Games Played`, `Goal Against`)
 
-# ------------- ¿Que paso en la Final? ---------------------------------
+# ------------- B?Que paso en la Final? ---------------------------------
 
 # 19 Mapa de tiros y pases
 map_arg <- the_final %>%
@@ -293,24 +293,24 @@ map_fra <- the_final %>%
   filter(Team %in% c("FRA"))
 
 #----------------------------------------------------------------------------------------
-# 20 ¿Cuantos penales fueron concebidos a los finalistas en todo el torneo?
+# 20 B?Cuantos penales fueron concebidos a los finalistas en todo el torneo?
 penaltis_final_s <- team_Penalties_Scored %>%
   filter(Country %in% c("Argentina", "France")) %>%
   select(`Country`, `Rank`, `Games Played`, `Penalties Scored`)
 
 #----------------------------------------------------------------------------------------
-# 21 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+# 21 B?Cuantos penales fueron en contra a los finalistas en todo el torneo?
 penaltis_final_a <- team_Penalties_Scored %>%
   filter(Country %in% c("Argentina", "France")) %>%
   select(`Country`, `Rank`, `Games Played`, `Goal Against`)
 
 #----------------------------------------------------------------------------------------
-# 22 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+# 22 B?Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
 wcup_cards_home <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Home_team_Yellow_cards, Home_team_red_cards)
 
-# 23 ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+# 23 B?Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
 wcup_cards_away <- FIFA_WORLD_CUP_2022 %>%
   filter(Mach_type %in% c("Final")) %>%
   select(Away_team_Yellow_cards, Away_team_red_cards)
@@ -365,10 +365,10 @@ stadium_final_wcup <- attendance_Sheet %>%
   select(Date, Time, Home, Away, Attendance, Venue)
 
 
-# ¿Cual fue el partido con mas asistencia?
+# B?Cual fue el partido con mas asistencia?
 max_attendance <- attendance_Sheet[which.max(attendance_Sheet$Attendance),]
 
-# ¿Cual fue el partido con menos asistencia?
+# B?Cual fue el partido con menos asistencia?
 min_attendance <- attendance_Sheet[which.min(attendance_Sheet$Attendance),]
 
 #----------- Parte II Visualizacion de los datos "Data Cleaning" -------------#
@@ -402,7 +402,7 @@ ggplot(total_top_5, aes(x = reorder(Team, -total), y = total)) +
   shadow_mark() + #sombra de la animacion
   enter_grow() + #animacion de crecimiento
   transition_states(total, wrap = FALSE) + #transicion de la animacion
-  labs(title = "Top 05 de selecciones más goleadoras", #titulo del grafico
+  labs(title = "Top 05 de selecciones mC!s goleadoras", #titulo del grafico
        subtitle = "Qatar 2022", #subtitulo del grafico
        caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF",
        tag = "Figura 1",
@@ -543,13 +543,14 @@ reactable(wcup_age, filterable = TRUE, minRows = 10)
 
 #----------------------------------------------------------------------------------------
 # Grafica 13 Promedio de edad de las selecciones
-ggplot(age_cup, aes(x = `Team`, group = 1)) + 
-  geom_line(aes(y = Age)) + 
+ggplot(age_cup, aes(x = reorder(Team, Age), group = 1, color = Team, fill = Team)) + 
+  geom_col(aes(y = Age), width = 0.5) +
+  geom_text(aes(y = Age, label = round(Age, digits = 1)), vjust = -1, size = 2.5) +
   labs(title = "Promedio de edad de las selecciones", 
        caption = "Fuente: Archivo de la Copa Mundial de la FIFA y RSSSF", 
        y = "Edad Promedio",
        x = "Selecciones") +  # title and caption
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.3),  # rotate x axis text
         panel.grid.minor = element_blank())  # turn off minor grid
 #----------------------------------------------------------------------------------------
 # Tabla 14 Ligas y Clubs con mayor influencia
@@ -565,7 +566,7 @@ reactable(fc_league1, filterable = TRUE, minRows = 10)
 
 # ------------- RESULTADOS POST MUNDIAL ---------------------------------
 
-# Tabla 16 ¿Quienes fueron los Goleadores del torneo? / Promedio de goles por partido
+# Tabla 16 B?Quienes fueron los Goleadores del torneo? / Promedio de goles por partido
 reactable(
   player_Goals,
   defaultSorted = "Goals",
@@ -575,7 +576,7 @@ reactable(
   )
 )
 #----------------------------------------------------------------------------------------
-# Tabla 17 ¿Quienes dieron mas asistencia a gol en el torneo?
+# Tabla 17 B?Quienes dieron mas asistencia a gol en el torneo?
 reactable(
   player_Assists,
   defaultSorted = "Assists",
@@ -596,7 +597,7 @@ reactable(
   )
 ) 
 #----------------------------------------------------------------------------------------
-# Tabla 19 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# Tabla 19 B?Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 reactable(
   wcup_penaltis_s,
   defaultSorted = "Penalties Scored",
@@ -606,7 +607,7 @@ reactable(
   )
 ) 
 
-# Grafica 20 ¿Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
+# Grafica 20 B?Cuales fueron las selecciones con mayor cantidad de penales a favor durante todo el torneo?
 ggplot(wcup_penaltis_s, aes(x = `Country`, group = 1)) + 
   geom_line(aes(y = `Penalties Scored`)) + 
   labs(title = "Selecciones con mayor cantidad de penales a favor durante todo el torneo", 
@@ -616,7 +617,7 @@ ggplot(wcup_penaltis_s, aes(x = `Country`, group = 1)) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5),  # rotate x axis text
         panel.grid.minor = element_blank())  # turn off minor grid
 #----------------------------------------------------------------------------------------
-# Tabla 21 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+# Tabla 21 B?Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 reactable(
   wcup_penaltis_a,
   defaultSorted = "Goal Against",
@@ -626,7 +627,7 @@ reactable(
   )
 )
 
-# Grafica 22 ¿Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
+# Grafica 22 B?Cuales fueron las selecciones con mayor cantidad de penales en contra durante todo el torneo?
 wcup_penaltis_a %>% 
   ggplot(aes(x = `Country`, y = `Goal Against`, fill = `Country`)) +
   geom_col() +
@@ -639,7 +640,7 @@ wcup_penaltis_a %>%
        x = "Selecciones",
        y = "Penales en Contra",
   )
-# ------------- ¿Que paso en la Final? ---------------------------------
+# ------------- B?Que paso en la Final? ---------------------------------
 
 # Grafica 23 tiros y pases a gol de la seleccion Argentina
 ggplot(map_arg) +
@@ -657,7 +658,7 @@ ggplot(map_fra) +
   theme_pitch() +
   theme(panel.background = element_rect(fill = "#186d33"))
 #----------------------------------------------------------------------------------------
-# 25 ¿Cuantos penales fueron en contra a los finalistas en todo el torneo?
+# 25 B?Cuantos penales fueron en contra a los finalistas en todo el torneo?
 test_data <- penaltis_final_a %>%
   merge(penaltis_final_s) %>%
   add_column(
@@ -672,13 +673,13 @@ test_data <- penaltis_final_a %>%
     `Corners` = 0,
     `Offside` = 0)
 
-# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
+# B?Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Argentina?
 
 test_data$`Red cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_red_cards
 test_data$`Yellow cards`[test_data$Country == "Argentina"] = wcup_cards_home$Home_team_Yellow_cards
   
 
-# ¿Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
+# B?Cuantas tarjetas amarillas y rojas hubo a lo largo del partido para Francia?
 
 test_data$`Red cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_red_cards
 test_data$`Yellow cards`[test_data$Country == "France"] = wcup_cards_away$Away_team_Yellow_cards
@@ -828,3 +829,12 @@ test_data %>%
       )
     )
   )
+
+#----------------------------------------------------------------------------------------
+# Grafica 26 Goles de selecciones ganadoras segun la edicion
+all_finals %>%
+  select(`Team`, `Year`, `Goals`) %>%
+  ggplot(aes(y = `Goals`, x = factor(`Year`), color = `Team`, fill = `Team`)) +
+    geom_bar(stat = 'identity', width = 0.5, alpha = 0.25) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45))
